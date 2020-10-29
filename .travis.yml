@@ -1,0 +1,8 @@
+deploy:
+  provider: heroku
+  api_key:
+    secure: yeABuv30MVPy1Co84Vj+7ekImKyFvej06iifSHwJ9zAv/1sPM/Ql6NIx/UbzkP4gDa9rhvlSxWY+93j/miSvubj6G8x/AF38uSX3fhLkEWEKpQ1DaGWZvNgkrvWlMCwNHs+40X/UBTAfP2XzqC8NmUH9AaFlHX8NV4LYafUS0j4jMnZCfeCkyC5vx9w8MAVHBLqhAveQxslBiq1I+1eFpFh9oT9uyzONheloYepGCkPa+9KlPCHoBHcHTC7A80WJz31UGEuPvYfpDgthbiZLWZRtXpe7vFTLjb+Ee5ZUWU6+uXsdFNkvkT0MI+FLh6wC6W5RpXKUzf7sJj6oEw24DBKur0Tu58WWtrOicbgKt5Jfk6EGSm0nxbOOOL+8gcxvsFsZOPBDsaAUl3V/vMoEE7nxr6Cdiwut7EEmRxVFGgIXZBOqvaV/X1xrl772JyZgmrf306sB1p3aT71hV5fCT0RwSxTM3aFcp/hHyPMZu/upVo4KQtgT8wBhgk55pHKgrYT0I+s8KK/SmmCwRHlW8nTap4wM1kd/Xt/PqF7+UT7T4aWh3dUQPe3VWGWUdpe8498jzRUv7BJV8SfXZBfA1byr0HkCbMM7jhJoQMx6bCtj74h/v/MIsrQYJAypb5b9TlS2JglNA9rdYDv/6GaLHByvB53HXOKgwwiCzuSEuo8=
+  app: classroom-wars
+  on:
+    repo: Classroom-Wars/Front-End
+  skip_cleanup: 'true'
