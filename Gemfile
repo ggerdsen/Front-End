@@ -29,6 +29,8 @@ gem 'bootstrap'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'travis'
 gem 'omniauth-google-oauth2'
+gem 'devise'
+gem 'omniauth'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
