@@ -12,13 +12,13 @@ class SessionsController < ApplicationController
     }
     id = request.env['omniauth.auth'][:uid]
     # new api request: am i in the system? yes, redirect_to dashboard. no, redirect to registration
-    response = Faraday.get("http://localhost:3000/api/v1/#{session[:user_type]}") do |request|
-      request.params[:id] = ENV['ID_KEY']
+    response = Faraday.get("http://localhost:3000/api/v1/#{session[:user_type]}/#{id}") do |request|
+      request.params[:id] = id
     end
-    require "pry"; binding.pry
-    response2 = Faraday.post("http://localhost:3000/api/v1/#{session[:user_type]}") do |request|
-      request.body = body
-    end
+
+    # response2 = Faraday.post("http://localhost:3000/api/v1/#{session[:user_type]}") do |request|
+    #   request.body = body
+    # end
 
     if session[:user_type] == 'students'
       redirect_to '/student/registration'
