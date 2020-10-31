@@ -13,7 +13,6 @@ class SessionsController < ApplicationController
     response = Faraday.post('http://localhost:3000/api/v1/students') do |request|
       request.body = body
     end
-    binding.pry
 
     # conn = Faraday.new(url: 'http://localhost:3000/api/v1', headers: {'Accept': 'application/json'})
     # response = conn.post('/students') do |req|
