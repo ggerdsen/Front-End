@@ -10,12 +10,22 @@ class SessionsController < ApplicationController
       client_secret: ENV['GOOGLE_CLIENT_SECRET'],
       access_token: request.env['omniauth.auth']
     }
-    response = Faraday.post('http://localhost:3000/api/v1/students') do |request|
+    id = request.env['omniauth.auth'][:uid]
+    # new api request: am i in the system? yes, redirect_to dashboard. no, redirect to registration
+    response = Faraday.get("http://localhost:3000/api/v1/#{session[:user_type]}") do |request|
+      request.params[:id] = ENV['ID_KEY']
+    end
+    require "pry"; binding.pry
+    response2 = Faraday.post("http://localhost:3000/api/v1/#{session[:user_type]}") do |request|
       request.body = body
     end
-    binding.pry
 
-    # conn = Faraday.new(url: 'http://localhost:3000/api/v1', headers: {'Accept': 'application/json'})
+    if session[:user_type] == 'students'
+      redirect_to '/student/registration'
+    else
+      redirect_to '/teacher/registration'
+      # conn = Faraday.new(url: 'http://localhost:3000/api/v1', headers: {'Accept': 'application/json'})
+    end
     # response = conn.post('/students') do |req|
     #   req.params['client_id'] = client_id
     #   req.params['client_secret'] = client_secret
