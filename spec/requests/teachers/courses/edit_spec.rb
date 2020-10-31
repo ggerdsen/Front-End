@@ -14,9 +14,25 @@ RSpec.describe 'Teacher edits a course' do
   describe 'edit' do
     it 'can consume an api and edit a course' do
       stub_omniauth
-      response = conn('/api/v1/teachers/courses/18/edit').patch
-      require "pry"; binding.pry
+      name = 'Criminal Psychology'
+      course_code = 2763
+      school_name = 'Vertapple University'
 
+      body = {
+        name: name,
+        course_code: course_code,
+        school_name: school_name
+      }
+
+      response = conn('/api/v1/teachers/courses/1').patch do |request|
+        request.body = body
+      end
+      json = JSON.parse(response.body, symbolize_names: true)
+      course = json[:data]
+
+      expect(course[:attributes][:name]).to eq(name)
+      expect(course[:attributes][:course_code]).to eq(course_code)
+      expect(course[:attributes][:school_name]).to eq(school_name)
     end
   end
 end
