@@ -5,7 +5,13 @@ class ApplicationController < ActionController::Base
                 :current_teacher?,
                 :current_student?
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    if session[:user_type] == 'students'
+      # @current_user ||= Student.find(session[:uid])
+      @current_user = {id: session[:uid], first_name: 'Test', last_name: 'Student'}
+    else
+      # @current_user ||= Teacher.find(session[:uid])
+      @current_user = {id: session[:uid], first_name: 'Test', last_name: 'Student'}
+    end
   end
 
   def current_student?
