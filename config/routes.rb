@@ -5,8 +5,15 @@ Rails.application.routes.draw do
 
   namespace :teachers do
     # resources :courses, only: [:show]
-    get '/courses/:course_id', to: 'courses#show'
-    get '/courses/:course_id/edit', to: 'courses#edit'
-    patch '/courses/:course_id', to: 'courses#update'
+    resources :courses, only: [:show, :index] do
+      resources :students, only: [:show, :index]
+    end
+    # get '/courses/:course_id', to: 'courses#show'
+    # get '/courses/:course_id/edit', to: 'courses#edit'
+    # patch '/courses/:course_id', to: 'courses#update'
+  end
+
+  namespace :student do
+    resources :courses, only: [:show, :index]
   end
 end
