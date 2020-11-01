@@ -28,7 +28,7 @@ RSpec.describe 'Teacher edits a course' do
         request.body = body
       end
       json = JSON.parse(response.body, symbolize_names: true)
-      course = json[:data]
+      course = json[:data][0]
 
       expect(course[:attributes][:name]).to eq(name)
       expect(course[:attributes][:course_code]).to eq(course_code)
