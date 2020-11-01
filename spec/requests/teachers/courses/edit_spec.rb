@@ -13,6 +13,10 @@ RSpec.describe 'Teacher edits a course' do
 
   describe 'edit' do
     it 'can consume an api and edit a course' do
+      response = Faraday.get('http://localhost:3000/api/v1/teachers/courses')
+      courses = JSON.parse(response.body, symbolize_names: true)
+      course = courses[:data].first
+
       stub_omniauth
       name = 'Criminal Psychology'
       course_code = 2763
@@ -24,7 +28,7 @@ RSpec.describe 'Teacher edits a course' do
         school_name: school_name
       }
 
-      response = conn('/api/v1/teachers/courses/1').patch do |request|
+      response = conn("/api/v1/teachers/courses/#{course[:data][:id]}").patch do |request|
         request.body = body
       end
       json = JSON.parse(response.body, symbolize_names: true)
