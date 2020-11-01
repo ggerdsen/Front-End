@@ -2,22 +2,26 @@ require 'rails_helper'
 
 RSpec.describe 'Student enrolls in a course' do
   scenario "as a logged in student" do
-    stub my user
-    visit my dashboard?
-        # Error because no-dashboard routing (we can ask Corey, Tyler, thems for their code)
-        # Route errors ask corey
-        # Controller errors ask corey
-        # View error ask corey
-        # Add a button for "Adding a course"
-    click add a class/course
-      # Our route/controller/view errors, follow
-    redirected to a form for class code
-      # This will require confirming class codes in postico
-    submit
-      # Follow the errors
-    redirected back to dashboard and see course
-      # Follow the errors
-    expect dashboard to have course name in the my classes section
+    stub_omniauth
+    # This will need to be updated once we have authorization for student users versus teacher users
+    visit student_courses
+    # EVENTUALLY, we need to update for dynamic since this test won't pass on anyone elses local
+        # faraday call on a teacher, on their course, who are their students?
+
+    # course = id 10, Arts name
+    # teacher id 4 Rubi Feest
+    course_name = 'Arts'
+    class_code = 'n5d7j7hb'
+    within 'my-classes' do
+      expect(page).to_not have_content(course_name)
+    end
+
+    fill_in 'enrollment', with: class_code
+    click_on 'Add Course'
+    expect(current_path).to eq(student_courses)
+    within 'my-classes' do
+      expect(page).to have_content(course_name)
+    end
   end
 
   scenario "as a not registered in student user" do
