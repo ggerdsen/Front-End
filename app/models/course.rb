@@ -1,9 +1,19 @@
 class Course
   attr_reader :name,
-              :id
+              :id,
+              :students,
+              :teacher_id
 
   def initialize(attrs)
-    @name = attrs[:data][0][:attributes][:name]
-    @id = attrs[:data][0][:id]
+    @name = attrs[:data][:attributes][:name]
+    @id = attrs[:data][:id]
+    @students = parse_students(attrs[:data][:attributes][:students][:data])
+    @teacher_id = attrs[:data][:relationships][:teacher][:data][:id]
+  end
+
+  def parse_students(students_data)
+    students_data.map do |student|
+      student[:attributes][:name]
+    end.sort
   end
 end
