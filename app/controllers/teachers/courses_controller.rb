@@ -1,6 +1,13 @@
 class Teachers::CoursesController < ApplicationController
+
   def show
-    response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:id]}")
+    response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:course_id]}")
+    course_data = JSON.parse(response.body, symbolize_names: true)
+    @course = Course.new(course_data)
+  end
+  
+  def roster
+    response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:course_id]}")
     course_data = JSON.parse(response.body, symbolize_names: true)
     @course = Course.new(course_data)
   end
