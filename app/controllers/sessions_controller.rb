@@ -5,8 +5,8 @@ class SessionsController < ApplicationController
       client_secret: ENV['GOOGLE_CLIENT_SECRET'],
       access_token: request.env['omniauth.auth']
     }
-    id = request.env['omniauth.auth'][:uid]
-    session[:uid] = id
+    uid = request.env['omniauth.auth'][:uid]
+    session[:uid] = uid
 
     response = Faraday.post("http://localhost:3000/api/v1/#{session[:user_type]}") do |request|
       request.body = body
