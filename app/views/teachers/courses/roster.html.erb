@@ -1,0 +1,26 @@
+<h1> <%= @course.name %> </h1>
+<%= button_to 'Return to Course Page', "/teachers/courses/#{@course.id}", method: :get%>
+<%= button_to 'Return to Teacher Dashboard', "/teachers/#{@course.teacher_id}", method: :get %>
+<section class='student-roster', id='student-roster'>
+<h2>Roster</h2>
+<% @course.students.each do |student_name| %>
+<section class='student' id='student=<%= student_name %>'>
+  <ul>
+    <li><%= student_name %></li>
+  </ul>
+  </section>
+  <% end %>
+</section>
+
+<section class='add-student-form', id='add-student-form'>
+  <h2>Add Student To Course</h2>
+  <%= form_tag "/api/v1/students/courses", method: :post do %>
+  <%= label_tag "New Student's Name" %>:<br>
+  <%= text_field_tag "New Student's Name" %><br>
+
+  <%= label_tag "New Student's Email" %>:<br>
+  <%= text_field_tag "New Student's Email" %><br>
+
+  <%= submit_tag 'Add Student', class: :button %>
+  <% end %>
+</section>
