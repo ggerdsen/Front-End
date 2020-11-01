@@ -28,7 +28,7 @@ RSpec.describe 'Teacher edits a course' do
         school_name: school_name
       }
 
-      response = conn("/api/v1/teachers/courses/#{course[:data][:id]}").patch do |request|
+      response = conn("/api/v1/teachers/courses/#{course[:id]}").patch do |request|
         request.body = body
       end
       json = JSON.parse(response.body, symbolize_names: true)
