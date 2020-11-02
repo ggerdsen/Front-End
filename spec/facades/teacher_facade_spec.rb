@@ -2,7 +2,9 @@ require 'rails_helper'
 
 describe TeacherFacade do
   it "returns student user object" do
-    uid = 123456789
+    uid = 100
+    response = File.read("spec/fixtures/teacher_facade.json")
+    stub_request(:get, "http://localhost:3000/api/v1/teachers/find/#{uid}").to_return(status: 200, body: response, headers: {})
     teacher = TeacherFacade.find(uid)
 
     expect(teacher).to be_a(Teacher)
