@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   namespace :teachers do
     # resources :courses, only: [:show]
+    # get '/courses/find', to: 'search#show'
     resources :courses, only: [:show, :index] do
       resources :students, only: [:show, :index]
     end
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
     # patch '/courses/:course_id', to: 'courses#update'
   end
 
-  namespace :student do
-    resources :courses, only: [:show, :index]
+  namespace :students do
+    resources :courses, only: [:show, :index, :create]
   end
 end
