@@ -14,7 +14,6 @@ RSpec.describe 'Student Dashboard' do
     end
     it 'I can see all of my courses' do
       visit '/student/courses'
-      save_and_open_page
       expect(page).to have_button("Geometry")
       expect(page).to have_button("Calculus")
       expect(page).to have_button("Physics")
