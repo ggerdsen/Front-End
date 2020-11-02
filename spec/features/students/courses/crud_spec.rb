@@ -31,6 +31,11 @@ RSpec.describe 'Students course CRUD' do
   end
 
   scenario "as a not registered in student user" do
+    # get a 404 error
+  end
+
+  scenario "as a registered student user I should not be able to enroll in the same course more than once" do
+    # Needs a block in BE student:courses controller in the create action to check if it is already in the database
   end
 
   scenario 'student can view (on dashboard) all courses they are currently enrolled in' do
