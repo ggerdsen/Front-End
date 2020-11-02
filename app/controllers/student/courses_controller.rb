@@ -5,6 +5,6 @@ class Student::CoursesController < ApplicationController
     # @courses = courses_data[:data].map do |course_data|
     #   Course.new(course_data)
     # end
-    @current_user = {id: 1, first_name: "Little Timmy", last_name: "Boy", courses: ["Geometry", "Calculus", "Physics"]}
+    @current_user = current_user
   end
 end
