@@ -15,7 +15,11 @@ class Students::CoursesController < ApplicationController
     response = conn("/api/v1/students/courses").get do |request|
       request.body = student_course_params
     end
-    @courses = JSON.parse(response.body, symbolize_names: true)
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    @courses = json[:data].map do |course_data|
+      Course.new(course_data)
+    end
     # NEED TO CALL OUR COURSES
     # @courses = sdlkfsldfkjsdlfkj
 
