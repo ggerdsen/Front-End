@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-describe Student do
+describe Teacher do
   before :each do
-    @student_info = {:data=>
-                      {:id=>"1",
+    @teacher_info = {:data=>
+                      {:id=>"2",
                       :type=>"student",
                       :attributes=>
                         {:first_name=>"Boom",
@@ -17,17 +17,18 @@ describe Student do
                       }
                     }
 
-    @student = Student.new(@student_info)
+    @teacher = Teacher.new(teacher_info)
   end
-
   it "exists with attributes" do
-    expect(@student).to be_a(Student)
-    expect(@student.id).to eq("1")
-    expect(@student.provider).to eq("google_oauth2")
-    expect(@student.uid).to eq("1057629160")
-    expect(@student.email).to eq("boom@email.com")
-    expect(@student.token).to eq("ya29.A0AfH6SMBTJgWLj4lYkXMoFz")
-    expect(@student.first_name).to eq("Boom")
-    expect(@student.last_name).to eq("Shakalaka")
+    expect(@teacher).to be_a(Teacher)
+    expect(@teacher.id).to eq("2")
+    expect(@teacher.provider).to eq("google_oauth2")
+    expect(@teacher.uid).to eq("1057629160")
+    expect(@teacher.email).to eq("boom@email.com")
+    expect(@teacher.token).to eq("ya29.A0AfH6SMBTJgWLj4lYkXMoFz")
+    expect(@teacher.first_name).to eq("Boom")
+    expect(@teacher.last_name).to eq("Shakalaka")
+    expect(@teacher.school_name).to eq(nil)
+    expect(@teacher.school_district).to eq(nil)
   end
 end
