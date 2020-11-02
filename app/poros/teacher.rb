@@ -5,7 +5,9 @@ class Teacher
               :email,
               :token,
               :first_name,
-              :last_name
+              :last_name,
+              :school_name,
+              :school_district
 
   def initialize(teacher_info)
     @id = teacher_info[:data][:id]
@@ -15,7 +17,7 @@ class Teacher
     @token = teacher_info[:data][:attributes][:token]
     @first_name = teacher_info[:data][:attributes][:first_name]
     @last_name = teacher_info[:data][:attributes][:last_name]
-    @school_name = nil
-    @school_district = nil
+    @school_name = teacher_info[:data][:attributes][:school_name]
+    @school_district = teacher_info[:data][:attributes][:school_district]
   end
 end
