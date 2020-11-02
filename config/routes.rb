@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get '/teacher/registration', to: 'teachers#new'
 
+  get '/logout', to: 'sessions#logout'
+
   namespace :student do
     resources :courses, only: [:show, :index]
   end
@@ -14,7 +16,6 @@ Rails.application.routes.draw do
   namespace :teacher do
     resources :courses, only: [:show, :index] do
       resources :students, only: [:show, :index]
-
     end
   end
 
