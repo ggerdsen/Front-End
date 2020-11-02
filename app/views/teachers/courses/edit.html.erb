@@ -1,0 +1,9 @@
+<h1>Edit <%=@course.name %></h1>
+<center>
+  <%= form_tag "/teachers/courses/#{@course.id}", method: :patch do %>
+    <%= label_tag :name %>
+    <%= text_field_tag :name, "#{@course.name}"%>
+
+    <%= submit_tag 'Update Course' %>
+  <% end %>
+</center>
