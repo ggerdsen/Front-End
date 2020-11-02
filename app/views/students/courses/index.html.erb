@@ -1,0 +1,10 @@
+<section id='my-classes'>
+  PASSED ANYTHING TO SHOW
+</section>
+
+<section id='options'>
+  <%= form_with url: "/students/courses", method: 'post' do |f| %>
+    <%= f.text_field :enrollment %>
+    <%= f.submit 'Add Course' %>
+  <% end %>
+</section>
