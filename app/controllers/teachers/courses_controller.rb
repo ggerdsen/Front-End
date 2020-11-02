@@ -13,7 +13,6 @@ class Teachers::CoursesController < ApplicationController
   end
 
   def update
-    binding.pry
     response = conn("/api/v1/teachers/courses/#{params[:id]}").patch do |request|
       request.body = course_params.to_h
     end
