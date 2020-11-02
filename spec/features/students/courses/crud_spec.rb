@@ -12,12 +12,18 @@ RSpec.describe 'Students course CRUD' do
     # teacher id 4 Rubi Feest
     # course_name = 'Arts'
     # class_code = 'n5d7j7hb'
+    # courses 16-24 are courses that aren't enrolled in by students 1-20
+    # course = id 17, "Communications" which is not a faker course that was created in 1-15
+    course_name = 'Communications'
+    course_code = '571bup4q'
 
     #Saryn's postico
     #course = id 12, Health Science
     #teacher id = 4 Philip Kuhlman
-    course_name = 'Health Science'
-    course_code = 'pmme9jr3'
+    # course_name = 'Health Science'
+    # course_code = 'pmme9jr3'
+
+
     within '#my-classes' do
       expect(page).to_not have_content(course_name)
     end
@@ -28,6 +34,7 @@ RSpec.describe 'Students course CRUD' do
     within '#my-classes' do
       expect(page).to have_content(course_name)
     end
+    # YOU WILL NEED TO DELETE YOUR LAST COURSESTUDENT RECORD EVERY TIME UNTIL WE CAN UPDATE WITH A DESTROY ACTION IN THE NEXT BRANCH
   end
 
   scenario "as a not registered in student user" do
@@ -44,19 +51,24 @@ RSpec.describe 'Students course CRUD' do
     visit students_courses_path
     # EVENTUALLY, we need to update for dynamic since this test won't pass on anyone elses local
         # faraday call on a teacher, on their course, who are their students?
-    #Priya's postico
+    # Priya's postico
     # course = id 10, Arts name
     # teacher id 4 Rubi Feest
-    # course_name = 'Arts'
-    # class_code = 'n5d7j7hb'
-
-    #Saryn's postico
-    #course = id 12, Health Science
-    #teacher id = 4 Philip Kuhlman
+    # course = id 11, Nursing name
     course1_name = 'Architectural Technology'
     #'zwijczf3'
-    course2_name = 'Biological Science'
-    #'dvnsocqu'
+    # course = id 12
+    course2_name = 'Medicine'
+    #'ntivka4p'
+
+
+    # Saryn's postico
+    # #course = id 12, Health Science
+    # #teacher id = 4 Philip Kuhlman
+    # course1_name = 'Architectural Technology'
+    # #'zwijczf3'
+    # course2_name = 'Biological Science'
+    # #'dvnsocqu'
 
     within '#my-classes' do
       expect(page).to have_content(course1_name)
