@@ -14,8 +14,14 @@ class SessionsController < ApplicationController
 
     if session[:user_type] == 'students'
       redirect_to '/student/dashboard'
-    else
-      redirect_to '/teacher/registration'
+    else session[:user_type] == 'teachers'
+      redirect_to '/teacher/dashboard'
     end
+  end
+
+  def destroy
+    session[:user_type] == ''
+    session.destroy
+    redirect_to root_path
   end
 end
