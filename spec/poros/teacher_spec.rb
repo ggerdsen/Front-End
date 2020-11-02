@@ -17,7 +17,7 @@ describe Teacher do
                       }
                     }
 
-    @teacher = Teacher.new(teacher_info)
+    @teacher = Teacher.new(@teacher_info)
   end
   it "exists with attributes" do
     expect(@teacher).to be_a(Teacher)
