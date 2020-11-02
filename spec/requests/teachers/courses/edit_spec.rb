@@ -38,26 +38,5 @@ RSpec.describe 'Teacher edits a course' do
       expect(course[:attributes][:course_code]).to eq(course_code)
       expect(course[:attributes][:school_name]).to eq(school_name)
     end
-
-    it 'can create and delete a course' do
-      #create
-      stub_omniauth
-      name = 'Couseling Theories'
-      course_code = 1234
-      school_name = 'Whitworth'
-
-      body = {
-        name: name,
-        course_code: course_code,
-        school_name: school_name
-      }
-
-      response = conn('/api/v1/teachers/courses').post do |request|
-        request.body = body
-      end
-
-      json = JSON.parse(response.body, symbolize_names: true)
-      require "pry"; binding.pry
-    end
   end
 end
