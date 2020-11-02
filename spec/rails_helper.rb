@@ -72,7 +72,9 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-def stub_omniauth
+def stub_student_omniauth
+  session[:user_type] = 'students'
+
   OmniAuth.config.test_mode = true
   omniauth_google_hash = {
       provider: 'google_oauth2',
@@ -120,5 +122,60 @@ def stub_omniauth
       }
       }
       }
+
+  OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(omniauth_google_hash)
+end
+
+def stub_teacher_omniauth
+  session[:user_type] = 'teachers'
+
+  OmniAuth.config.test_mode = true
+  omniauth_google_hash = {
+      provider: 'google_oauth2',
+      uid: '200000000000000000000',
+      info: {
+      name: 'Sally Strong',
+      email: 'strong@email.com',
+      first_name: 'Sally',
+      last_name: 'Strong',
+      image: 'https://lh4.googleusercontent.com/photo.jpg',
+      urls: {
+      google: 'https://plus.google.com/+SallyStrong'
+      }
+      },
+      credentials: {
+      token: 'MOCK_OMNIAUTH_GOOGLE_TOKEN',
+      refresh_token: 'MOCK_OMNIAUTH_GOOGLE_REFRESH TOKEN',
+      expires_at: DateTime.now,
+      expires: true
+      },
+      extra: {
+      id_token: 'ID_TOKEN',
+      id_info: {
+      azp: 'APP_ID',
+      aud: 'APP_ID',
+      sub: '200000000000000000000',
+      email: 'strong@email.com',
+      email_verified: true,
+      at_hash: 'HK6E_P6Dh8Y93mRNtsDB1Q',
+      iss: 'accounts.google.com',
+      iat: 1496117119,
+      exp: 1496120719
+      },
+      raw_info: {
+      sub: '200000000000000000000',
+      name: 'Sally Strong',
+      given_name: 'Sally',
+      family_name: 'Strong',
+      profile: 'https://plus.google.com/+SallyStrong',
+      picture: 'https://lh4.googleusercontent.com/photo.jpg?sz=50',
+      email: 'strong@email.com',
+      email_verified: 'true',
+      locale: 'en',
+      hd: 'company.com'
+      }
+      }
+      }
+
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(omniauth_google_hash)
 end
