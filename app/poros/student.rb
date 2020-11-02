@@ -8,10 +8,10 @@ attr_reader :student_id,
 
   def initialize(student_data, course_data, pom_data)
   
-    @student_id = student_data[:id]
-    @first_name = student_data[:first_name]
-    @last_name = student_data[:last_name]
-    @points = student_data[:points]
+    @student_id = student_data[:attributes][:id]
+    @first_name = student_data[:attributes][:first_name]
+    @last_name = student_data[:attributes][:last_name]
+    @points = student_data[:attributes][:points]
     @courses = course_data.map do |course|
       Course.new(course)
     end

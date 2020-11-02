@@ -1,11 +1,17 @@
 class Course
-  attr_reader :name,
-  :course_code,
-  :school_name
-  
-  def initialize(course_data)
-    @name = course_data[:name]
-    @course_code = course_data[:name]
-    @school_name = course_data[:school_name]
+  attr_reader :id,
+              :name,
+              :course_code,
+              :school_name,
+              :teacher_id,
+              :course_points
+
+  def initialize(attrs)
+    @id = attrs[:id]
+    @name = attrs[:attributes][:name]
+    @course_code = attrs[:attributes][:course_code]
+    @school_name = attrs[:attributes][:school_name]
+    @teacher_id = attrs[:attributes][:teacher_id]
+    @course_points = attrs[:attributes][:course_points]
   end
 end

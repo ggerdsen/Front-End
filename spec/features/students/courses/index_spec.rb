@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe 'Student Dashboard' do
   describe 'As a student' do
     before :each do
-      student_data = {id: 1, first_name: "Little Timmy", last_name: "Boy", points: 134}
+      student_data = {attributes: {id: 1, first_name: "Little Timmy", last_name: "Boy", points: 134}}
       
-      course_data = [{name: "Geometry", course_code: '1', school_name: 'HomeSkool'}, {name: "Calculus", course_code: '2', school_name: 'HomeSkool'}, {name: "Physics", course_code: '3', school_name: 'HomeSkool'}]
+      course_data = [{attributes:{name: "Geometry", course_code: '1', school_name: 'HomeSkool'}}, {attributes:{name: "Calculus", course_code: '2', school_name: 'HomeSkool'}}, {attributes:{name: "Physics", course_code: '3', school_name: 'HomeSkool'}}]
       
-      pom_data =  [{id: '1', name: 'Fishy Time', description: "Feeding the goldfish", duration: '2 minutes', link: 'www.breadfish.uk'}, {id: '2', name: 'Kegerator', description: "Doing kegstands", duration: 'as long as you can hold', link: 'www.helpme.io'}]
+      pom_data =  [{attributes:{id: '1', name: 'Fishy Time', description: "Feeding the goldfish", duration: '2 minutes', link: 'www.breadfish.uk'}}, {attributes:{id: '2', name: 'Kegerator', description: "Doing kegstands", duration: 'as long as you can hold', link: 'www.helpme.io'}}]
       
       @student_user = Student.new(student_data, course_data, pom_data)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@student_user)
