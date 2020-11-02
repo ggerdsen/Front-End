@@ -5,7 +5,16 @@ class Students::CoursesController < ApplicationController
   end
 
   def index
-    response = conn("/api").get
+    # @student = current_user
+    student_id = 4
+    # From postico (priyas local), student #20 is who we are using "Gala Schamberger"
+    # From postico (Saryn's local), student 4 is who grabbed (Fidel Ryan DDS)
+    response = conn("/api/v1/students/#{student_id}").get
+    student = JSON.parse(response.body, symbolize_names: true)
+    student_course_params = {student_id: student[:data][:id].to_i}
+    response = conn("/api/v1/students/courses").get do |request|
+      request.body = student_course_params
+    end
     @courses = JSON.parse(response.body, symbolize_names: true)
     # NEED TO CALL OUR COURSES
     # @courses = sdlkfsldfkjsdlfkj
@@ -29,9 +38,9 @@ class Students::CoursesController < ApplicationController
       # student = current_user
       # response = conn("/api/v1/students/#{student.id}").get
 
-      student_id = 20
-      # From postico (priyas local), student #20 is who we are using "Gala Schamberger"
-
+      student_id = 4
+        # From postico (priyas local), student #20 is who we are using "Gala Schamberger"
+        # From postico (Saryn's local), student 4 is who grabbed (Fidel Ryan DDS)
       response = conn("/api/v1/students/#{student_id}").get
       student = JSON.parse(response.body, symbolize_names: true)
 
