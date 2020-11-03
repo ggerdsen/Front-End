@@ -37,19 +37,38 @@ class Teachers::CoursesController < ApplicationController
     response = conn("/api/v1/teachers/courses/#{params[:id]}").patch do |request|
       request.body = course_params.to_h
     end
-    # response = Faraday.patch("http://localhost:3000/api/v1/teachers/courses/#{course_params[:course_id]}")
     course_data = JSON.parse(response.body, symbolize_names: true)
     @course = Course.new(course_data)
   end
 
-  def conn(uri)
-    url = ENV['CLASS_WARS_DOMAIN'] + uri
-    Faraday.new(url)
+  def create
+    teacher_id = 1
+    response = conn("/api/v1/teachers/#{teacher_id}").get
+    teacher = JSON.parse(response.body, symbolize_names: true)
+
+    teacher_course_creation_params = {
+      name: course_params[:name],
+      teacher_id: teacher[:data][:id].to_i,
+      school_name: course_params[:school_name]
+    }
+
+    response = conn("/api/v1/teachers/courses/#{params[:id]}").post do |request|
+      request.body = teacher_course_creation_params
+    end
+
+    JSON.parse(response.body, symbolize_names: true)
+    redirect_to teachers_courses_path
+  end
+
+  def destroy
+    course_id = params[:id]
+    conn("/api/v1/teachers/courses/#{course_id}").delete
+    redirect_to teachers_courses_path
   end
 
   private
 
   def course_params
-    params.permit(:name)
+    params.permit(:name, :school_name, :teacher_id)
   end
 end
