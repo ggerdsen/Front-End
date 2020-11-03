@@ -8,22 +8,22 @@ RSpec.describe 'Students course CRUD' do
     # EVENTUALLY, we need to update for dynamic since this test won't pass on anyone elses local
         # faraday call on a teacher, on their course, who are their students?
     #Priya's postico
-    # course = id 10, Arts name
-    # teacher id 4 Rubi Feest
-    # course_name = 'Arts'
-    # class_code = 'n5d7j7hb'
-    # courses 16-24 are courses that aren't enrolled in by students 1-20
-    # course = id 17, "Communications" which is not a faker course that was created in 1-15
-    course_name = 'Communications'
-    course_code = '571bup4q'
+    # Student id 4
+    # Has courses:
+    # 8 Health Science wu07y8kz teacher 4
+    # 12 Biomedical Science mu83vu1b teacher 6
+    # courses 21-24 are courses that aren't enrolled in by students 1-20
+    # 21 Business fvwcsruy teacher 11
 
-    #Saryn's postico
+    course_name = 'Business'
+    course_code = 'fvwcsruy'
+
+    # SARYN RESEED!!!!
+    #Saryn's postico (PLEASE RESEEED!!!)
     #course = id 12, Health Science
     #teacher id = 4 Philip Kuhlman
     # course_name = 'Health Science'
     # course_code = 'pmme9jr3'
-
-
     within '#my-classes' do
       expect(page).to_not have_content(course_name)
     end
@@ -51,15 +51,15 @@ RSpec.describe 'Students course CRUD' do
     visit students_courses_path
     # EVENTUALLY, we need to update for dynamic since this test won't pass on anyone elses local
         # faraday call on a teacher, on their course, who are their students?
-    # Priya's postico
-    # course = id 10, Arts name
-    # teacher id 4 Rubi Feest
-    # course = id 11, Nursing name
-    course1_name = 'Architectural Technology'
-    #'zwijczf3'
-    # course = id 12
-    course2_name = 'Medicine'
-    #'ntivka4p'
+    #Priya's postico
+    # Student id 4
+    # Has courses:
+    # 8 Health Science wu07y8kz teacher 4
+    # 12 Biomedical Science mu83vu1b teacher 6
+    # courses 21-24 are courses that aren't enrolled in by students 1-20
+    # 21 Business fvwcsruy teacher 11
+    course1_name = 'Health Science'
+    course2_name = 'Biomedical Science'
 
 
     # Saryn's postico
@@ -74,5 +74,45 @@ RSpec.describe 'Students course CRUD' do
       expect(page).to have_content(course1_name)
       expect(page).to have_content(course2_name)
     end
+  end
+
+  scenario 'student can unenroll from a course' do
+    stub_omniauth
+    visit students_courses_path
+    #Priya's postico
+    # Student id 4
+    # Has courses:
+    # 8 Health Science wu07y8kz teacher 4
+    # 12 Biomedical Science mu83vu1b teacher 6
+    # courses 21-24 are courses that aren't enrolled in by students 1-20
+    # 21 Business fvwcsruy teacher 11
+    # 23 Education q875qj94
+
+    course1_name = 'Health Science'
+    course1_id = 8
+    course1_course_code = 'wu07y8kz'
+    course2_name = 'Biomedical Science'
+
+    within '#my-classes' do
+      expect(page).to have_content(course1_name)
+      expect(page).to have_content(course2_name)
+    end
+
+    within '#my-classes' do
+      within "#class-#{course1_id}" do
+        click_on 'Unenroll in Course'
+      end
+    end
+    expect(current_path).to eq(students_courses_path)
+
+    within '#my-classes' do
+      expect(page).to_not have_content(course1_name)
+      expect(page).to have_content(course2_name)
+    end
+
+    # Put it back in the database
+    fill_in :enrollment, with: course1_course_code
+    click_on 'Add Course'
+    expect(current_path).to eq(students_courses_path)
   end
 end
