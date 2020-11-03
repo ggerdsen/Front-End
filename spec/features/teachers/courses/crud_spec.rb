@@ -30,8 +30,8 @@ RSpec.describe 'Teachers course CRUD' do
   end
 
   scenario "a teacher can create and destroy courses on their dashboard " do
-    stub_omniauth
     # stub_omniauth_teacher
+    stub_omniauth
     visit teachers_courses_path
 
     teacher_course_params = {
@@ -55,8 +55,7 @@ RSpec.describe 'Teachers course CRUD' do
       expect(page).to have_content(teacher_course_params[:name])
     end
 
-    # Chris's postico courses end at 24, so this created course would be id 25
-    teacher_params = ({teacher_id: 1})
+    teacher_params = ({teacher_id: 1}) # teacher_params = ({teacher_id: current_user[:uid]})
     response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
       request.body = teacher_params
     end

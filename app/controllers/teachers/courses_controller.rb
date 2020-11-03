@@ -5,7 +5,6 @@ class Teachers::CoursesController < ApplicationController
   end
 
   def index
-    # Priyas Postico
     teacher_id = 1
     response = conn("/api/v1/teachers/#{teacher_id}").get
     teacher = JSON.parse(response.body, symbolize_names: true)
@@ -18,27 +17,6 @@ class Teachers::CoursesController < ApplicationController
     @courses = json[:data].map do |course_data|
       Course.new(course_data)
     end
-  end
-
-  def show
-    response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:id]}")
-    course_data = JSON.parse(response.body, symbolize_names: true)
-    @course = Course.new(course_data)
-  end
-
-  def edit
-    response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:id]}")
-    course_data = JSON.parse(response.body, symbolize_names: true)
-
-    @course = Course.new(course_data)
-  end
-
-  def update
-    response = conn("/api/v1/teachers/courses/#{params[:id]}").patch do |request|
-      request.body = course_params.to_h
-    end
-    course_data = JSON.parse(response.body, symbolize_names: true)
-    @course = Course.new(course_data)
   end
 
   def create
@@ -58,6 +36,27 @@ class Teachers::CoursesController < ApplicationController
 
     JSON.parse(response.body, symbolize_names: true)
     redirect_to teachers_courses_path
+  end
+
+  def show
+    response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:id]}")
+    course_data = JSON.parse(response.body, symbolize_names: true)
+    @course = Course.new(course_data)
+  end
+
+  # def edit
+  #   response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:id]}")
+  #   course_data = JSON.parse(response.body, symbolize_names: true)
+  #
+  #   @course = Course.new(course_data)
+  # end
+
+  def update
+    response = conn("/api/v1/teachers/courses/#{params[:id]}").patch do |request|
+      request.body = course_params.to_h
+    end
+    course_data = JSON.parse(response.body, symbolize_names: true)
+    @course = Course.new(course_data)
   end
 
   def destroy
