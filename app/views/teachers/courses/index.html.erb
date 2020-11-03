@@ -3,6 +3,7 @@
     <section id='course-<%=course.id%>'>
     <ul>
       <%= course.name %>
+      <%= link_to 'Course Show Page', "/teachers/courses/#{course.id}" %>
     </ul>
     <ul>
       <%= course.school_name %>
