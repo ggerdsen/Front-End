@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
       client_secret: ENV['GOOGLE_CLIENT_SECRET'],
       access_token: request.env['omniauth.auth']
     }
+
     uid = request.env['omniauth.auth'][:uid]
     session[:uid] = uid
 
@@ -13,7 +14,7 @@ class SessionsController < ApplicationController
     end
 
     if session[:user_type] == 'students'
-      redirect_to '/student/dashboard'
+      redirect_to '/student/courses'
     else session[:user_type] == 'teachers'
       redirect_to '/teacher/dashboard'
     end
