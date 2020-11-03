@@ -38,14 +38,30 @@ RSpec.describe 'Teachers course CRUD' do
       expect(page).to_not have_content(teacher_course_params[:name])
     end
 
-    fill_in :name, with: teacher_course_params[:name]
-    fill_in :school_name, with: teacher_course_params[:school_name]
+    within '#add-courses' do
+      fill_in :name, with: teacher_course_params[:name]
+      fill_in :school_name, with: teacher_course_params[:school_name]
+      click_on 'Add Course'
+    end
 
-    click_on 'Add Course'
     expect(current_path).to eq(teachers_courses_path)
 
     within '#my-courses' do
       expect(page).to have_content(teacher_course_params[:name])
+    end
+
+    # Chris's postico courses end at 24, so this created course would be id 25
+    course1_id = 25
+
+    within '#my-courses' do
+      within "#course-#{course1_id}" do
+        click_on 'Remove Course'
+      end
+    end
+    expect(current_path).to eq(teachers_courses_path)
+
+    within '#my-courses' do
+      expect(page).to_not have_content(teacher_course_params[:name])
     end
   end
 end
