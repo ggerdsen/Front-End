@@ -12,7 +12,7 @@ RSpec.describe "student login" do
 
         click_on "Sign in with Google"
 
-        expect(page).to have_content("Giovanni")
+        expect(page).to have_content("John")
         expect(page).to have_button("Log Out")
         expect(current_path).to eq("/student/courses")
       end
