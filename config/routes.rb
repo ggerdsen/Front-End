@@ -10,5 +10,7 @@ Rails.application.routes.draw do
     resources :courses, only: [:show, :index]
    end
 
-  get '/teacher/dashboard', to: 'teachers#dashboard'
+  namespace :teacher do
+    resources :courses, only: [:show, :index]
+  end
 end
