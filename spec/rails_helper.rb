@@ -73,110 +73,63 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-def stub_student_omniauth
-  session[:user_type] = 'students'
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.hook_into :webmock
+  # config.filter_sensitive_data('<GOOGLE_CLIENT>') { ENV['GOOGLE_CLIENT_ID'] }
+  # config.filter_sensitive_data('<GOOGLE_SECRET>') { ENV['GOOGLE_CLIENT_SECRET'] }
+  config.configure_rspec_metadata!
+  config.allow_http_connections_when_no_cassette = true
+end
 
+def stub_student_omniauth
   OmniAuth.config.test_mode = true
   omniauth_google_hash = {
-      provider: 'google_oauth2',
-      uid: '100000000000000000000',
-      info: {
-      name: 'John Smith',
-      email: 'john@example.com',
-      first_name: 'John',
-      last_name: 'Smith',
-      image: 'https://lh4.googleusercontent.com/photo.jpg',
-      urls: {
-      google: 'https://plus.google.com/+JohnSmith'
-      }
-      },
-      credentials: {
-      token: 'MOCK_OMNIAUTH_GOOGLE_TOKEN',
-      refresh_token: 'MOCK_OMNIAUTH_GOOGLE_REFRESH TOKEN',
-      expires_at: DateTime.now,
-      expires: true
-      },
-      extra: {
-      id_token: 'ID_TOKEN',
-      id_info: {
-      azp: 'APP_ID',
-      aud: 'APP_ID',
-      sub: '100000000000000000000',
-      email: 'john@example.com',
-      email_verified: true,
-      at_hash: 'HK6E_P6Dh8Y93mRNtsDB1Q',
-      iss: 'accounts.google.com',
-      iat: 1496117119,
-      exp: 1496120719
-      },
-      raw_info: {
-      sub: '100000000000000000000',
-      name: 'John Smith',
-      given_name: 'John',
-      family_name: 'Smith',
-      profile: 'https://plus.google.com/+JohnSmith',
-      picture: 'https://lh4.googleusercontent.com/photo.jpg?sz=50',
-      email: 'john@example.com',
-      email_verified: 'true',
-      locale: 'en',
-      hd: 'company.com'
-      }
-      }
-      }
+    provider: 'google_oauth2',
+    uid: '20',
+    info: {
+    name: 'John Smith',
+    email: 'john@example.com',
+    first_name: 'John',
+    last_name: 'Smith',
+    image: 'https://lh4.googleusercontent.com/photo.jpg',
+    urls: {
+    google: 'https://plus.google.com/+JohnSmith'
+    }
+    },
+    credentials: {
+    token: 'MOCK_OMNIAUTH_GOOGLE_TOKEN',
+    refresh_token: 'MOCK_OMNIAUTH_GOOGLE_REFRESH TOKEN',
+    expires_at: DateTime.now,
+    expires: true
+    }
+  }
 
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(omniauth_google_hash)
 end
 
 def stub_teacher_omniauth
-  session[:user_type] = 'teachers'
-
   OmniAuth.config.test_mode = true
   omniauth_google_hash = {
-      provider: 'google_oauth2',
-      uid: '200000000000000000000',
-      info: {
-      name: 'Sally Strong',
-      email: 'strong@email.com',
-      first_name: 'Sally',
-      last_name: 'Strong',
-      image: 'https://lh4.googleusercontent.com/photo.jpg',
-      urls: {
-      google: 'https://plus.google.com/+SallyStrong'
-      }
-      },
-      credentials: {
-      token: 'MOCK_OMNIAUTH_GOOGLE_TOKEN',
-      refresh_token: 'MOCK_OMNIAUTH_GOOGLE_REFRESH TOKEN',
-      expires_at: DateTime.now,
-      expires: true
-      },
-      extra: {
-      id_token: 'ID_TOKEN',
-      id_info: {
-      azp: 'APP_ID',
-      aud: 'APP_ID',
-      sub: '200000000000000000000',
-      email: 'strong@email.com',
-      email_verified: true,
-      at_hash: 'HK6E_P6Dh8Y93mRNtsDB1Q',
-      iss: 'accounts.google.com',
-      iat: 1496117119,
-      exp: 1496120719
-      },
-      raw_info: {
-      sub: '200000000000000000000',
-      name: 'Sally Strong',
-      given_name: 'Sally',
-      family_name: 'Strong',
-      profile: 'https://plus.google.com/+SallyStrong',
-      picture: 'https://lh4.googleusercontent.com/photo.jpg?sz=50',
-      email: 'strong@email.com',
-      email_verified: 'true',
-      locale: 'en',
-      hd: 'company.com'
-      }
-      }
-      }
-
+    provider: 'google_oauth2',
+    uid: '200000000000000000000',
+    info: {
+    name: 'Sally Strong',
+    email: 'strong@email.com',
+    first_name: 'Sally',
+    last_name: 'Strong',
+    image: 'https://lh4.googleusercontent.com/photo.jpg',
+    urls: {
+    google: 'https://plus.google.com/+SallyStrong'
+    }
+    },
+    credentials: {
+    token: 'MOCK_OMNIAUTH_GOOGLE_TOKEN',
+    refresh_token: 'MOCK_OMNIAUTH_GOOGLE_REFRESH TOKEN',
+    expires_at: DateTime.now,
+    expires: true
+    }
+  }
+    
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(omniauth_google_hash)
 end
