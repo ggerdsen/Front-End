@@ -1,15 +1,35 @@
-<section id='my-classes'>
-  <% @courses.each do |course| %>
-    <section id='class-<%=course.id%>'>
-    <%= course.name %>
-    <%= link_to 'Unenroll in Course', "/students/courses/#{course.id}", method: :delete, data: { confirm: "Are you sure?" } %>
-    </section>
-  <% end %>
-</section>
+<div class="jumbotron">
+      <div class="container">
+        <h1>Welcome <%= @current_user.first_name %></h1>
+      </div>
+    </div>
+<div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h2>My Classes</h2>
+          <% @current_user.courses.each do |course| %>
+            <%= button_to  "#{course.name}", "/current_user/courses/#{course.id}" %>
+          <% end %>
+          <section id='options'>
+          <%= form_with url: "/current_users/courses", method: 'post' do |f| %>
+            <%= f.text_field :enrollment %>
+            <%= f.submit 'Add Course' %>
+          <% end %>
+          </section>
+        </div>
 
-<section id='options'>
-  <%= form_with url: '/students/courses', method: :post do |f| %>
-    <%= f.text_field :enrollment %>
-    <%= f.submit 'Add Course' %>
-  <% end %>
-</section>
+        <div class="col-md-4">
+          <h2>My Points</h2>
+          <h4><%= @current_user.points %></h4>
+       </div>
+        <div class="col-md-4">
+          <h2>My Poms</h2>
+          <ol>
+          <% @current_user.poms.each do |pom| %>
+          <li><%= link_to  "#{pom.name}", "poms/#{pom.id}" %></li>
+          <%end%>
+          </ol>
+       </div>
+      </div>
+      <hr>
+    </div>

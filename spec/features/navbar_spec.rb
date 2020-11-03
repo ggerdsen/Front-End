@@ -7,7 +7,7 @@ RSpec.describe 'Navigation Restrictions' do
     end
 
     xit 'I can not visit the student dashboard' do
-      visit '/student/courses'
+      visit '/students/courses'
     end
 
 
