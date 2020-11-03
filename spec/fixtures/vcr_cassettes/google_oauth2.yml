@@ -5,7 +5,9 @@ http_interactions:
     uri: http://localhost:3000/api/v1/students
     body:
       encoding: UTF-8
-      string: access_token%5Bcredentials%5D%5Bexpires%5D=true&access_token%5Bcredentials%5D%5Bexpires_at%5D=2020-11-02T16%3A11%3A35-08%3A00&access_token%5Bcredentials%5D%5Brefresh_token%5D=MOCK_OMNIAUTH_GOOGLE_REFRESH+TOKEN&access_token%5Bcredentials%5D%5Btoken%5D=MOCK_OMNIAUTH_GOOGLE_TOKEN&access_token%5Binfo%5D%5Bemail%5D=john%40example.com&access_token%5Binfo%5D%5Bfirst_name%5D=John&access_token%5Binfo%5D%5Bimage%5D=https%3A%2F%2Flh4.googleusercontent.com%2Fphoto.jpg&access_token%5Binfo%5D%5Blast_name%5D=Smith&access_token%5Binfo%5D%5Bname%5D=John+Smith&access_token%5Binfo%5D%5Burls%5D%5Bgoogle%5D=https%3A%2F%2Fplus.google.com%2F%2BJohnSmith&access_token%5Bprovider%5D=google_oauth2&access_token%5Buid%5D=20&client_id=810277124767-qu6371arj9e9a42fmurhm7c84cm3b4p0.apps.googleusercontent.com&client_secret=c5olVAjBd2nXOgL1A9jzAl8z
+      string: '{"client_id":"<GOOGLE_CLIENT>","client_secret":"<GOOGLE_SECRET>","user_data":{"provider":"google_oauth2","uid":"20","info":{"name":"John
+        Smith","email":"john@example.com","first_name":"John","last_name":"Smith","image":"https://lh4.googleusercontent.com/photo.jpg","urls":{"google":"https://plus.google.com/+JohnSmith"}},"credentials":{"token":"MOCK_OMNIAUTH_GOOGLE_TOKEN","refresh_token":"MOCK_OMNIAUTH_GOOGLE_REFRESH
+        TOKEN","expires_at":"2020-11-03T16:15:49-06:00","expires":true}}}'
     headers:
       User-Agent:
       - Faraday v1.1.0
@@ -23,19 +25,19 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"f98de868dd46e176deb1f8e6971e6004"
+      - W/"8b80198a3e3fa754f3a1e7c242926472"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - '09baae15-5993-44fb-a81f-161de464fae2'
+      - 223c3609-1b7b-400d-8dba-d17b9b9993c5
       X-Runtime:
-      - '0.046255'
+      - '0.169542'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"data":{"id":"20","type":"student","attributes":{"first_name":"Giovanni","last_name":"Turcotte","provider":"Google","uid":"20","email":"erin_mraz@bradtke.com","token":"05hxmzeu6h7m","refresh_token":"joc2tl7zk7cz"},"relationships":{"courses":{"data":[{"id":"1","type":"course"},{"id":"2","type":"course"},{"id":"3","type":"course"},{"id":"4","type":"course"},{"id":"5","type":"course"},{"id":"6","type":"course"},{"id":"7","type":"course"},{"id":"8","type":"course"},{"id":"9","type":"course"},{"id":"10","type":"course"},{"id":"11","type":"course"},{"id":"12","type":"course"},{"id":"13","type":"course"},{"id":"14","type":"course"},{"id":"15","type":"course"}]}}}}'
-  recorded_at: Tue, 03 Nov 2020 00:11:35 GMT
+      string: '{"data":{"id":"20","type":"student","attributes":{"first_name":"John","last_name":"Smith","provider":"google_oauth2","uid":"20","email":"john@example.com","token":"MOCK_OMNIAUTH_GOOGLE_TOKEN","refresh_token":"mhjj4ic7o4pp"},"relationships":{"courses":{"data":[{"id":"1","type":"course"},{"id":"2","type":"course"},{"id":"3","type":"course"},{"id":"4","type":"course"},{"id":"5","type":"course"},{"id":"6","type":"course"},{"id":"7","type":"course"},{"id":"8","type":"course"},{"id":"9","type":"course"},{"id":"10","type":"course"},{"id":"11","type":"course"},{"id":"12","type":"course"},{"id":"13","type":"course"},{"id":"14","type":"course"},{"id":"15","type":"course"}]}}}}'
+  recorded_at: Tue, 03 Nov 2020 22:15:49 GMT
 - request:
     method: get
     uri: http://localhost:3000/api/v1/students/find/20
@@ -57,17 +59,17 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"f98de868dd46e176deb1f8e6971e6004"
+      - W/"8b80198a3e3fa754f3a1e7c242926472"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 949216b7-399e-4b2f-84d4-7464bfcb491b
+      - b959d1f8-fd08-4d90-88bc-199f5515b3c0
       X-Runtime:
-      - '0.011427'
+      - '0.004947'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"data":{"id":"20","type":"student","attributes":{"first_name":"Giovanni","last_name":"Turcotte","provider":"Google","uid":"20","email":"erin_mraz@bradtke.com","token":"05hxmzeu6h7m","refresh_token":"joc2tl7zk7cz"},"relationships":{"courses":{"data":[{"id":"1","type":"course"},{"id":"2","type":"course"},{"id":"3","type":"course"},{"id":"4","type":"course"},{"id":"5","type":"course"},{"id":"6","type":"course"},{"id":"7","type":"course"},{"id":"8","type":"course"},{"id":"9","type":"course"},{"id":"10","type":"course"},{"id":"11","type":"course"},{"id":"12","type":"course"},{"id":"13","type":"course"},{"id":"14","type":"course"},{"id":"15","type":"course"}]}}}}'
-  recorded_at: Tue, 03 Nov 2020 00:11:35 GMT
+      string: '{"data":{"id":"20","type":"student","attributes":{"first_name":"John","last_name":"Smith","provider":"google_oauth2","uid":"20","email":"john@example.com","token":"MOCK_OMNIAUTH_GOOGLE_TOKEN","refresh_token":"mhjj4ic7o4pp"},"relationships":{"courses":{"data":[{"id":"1","type":"course"},{"id":"2","type":"course"},{"id":"3","type":"course"},{"id":"4","type":"course"},{"id":"5","type":"course"},{"id":"6","type":"course"},{"id":"7","type":"course"},{"id":"8","type":"course"},{"id":"9","type":"course"},{"id":"10","type":"course"},{"id":"11","type":"course"},{"id":"12","type":"course"},{"id":"13","type":"course"},{"id":"14","type":"course"},{"id":"15","type":"course"}]}}}}'
+  recorded_at: Tue, 03 Nov 2020 22:15:49 GMT
 recorded_with: VCR 6.0.0
