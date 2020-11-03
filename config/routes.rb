@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   namespace :teachers do
     # resources :courses, only: [:show]
     # get '/courses/find', to: 'search#show'
-    resources :courses, only: [:show, :index] do
+    resources :courses, only: [:show, :index, :create] do
       resources :students, only: [:show, :index]
     end
     # get '/courses/:course_id', to: 'courses#show'
