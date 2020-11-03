@@ -51,11 +51,19 @@ class Teachers::CoursesController < ApplicationController
   end
 
   def update
-    response = conn("/api/v1/teachers/courses/#{params[:id]}").patch do |request|
-      request.body = course_params.to_h
+    update_params = {course_id: params[:id]}
+    if !course_params[:name].nil?
+      update_params[:name] = course_params[:name]
     end
-    course_data = JSON.parse(response.body, symbolize_names: true)
+    if !course_params[:school_name].nil?
+      update_params[:school_name] = course_params[:school_name]
+    end
+    response = conn("/api/v1/teachers/courses/#{params[:id]}").patch do |request|
+      request.body = update_params
+    end
+    course_data = JSON.parse(response.body, symbolize_names: true)[:data]
     @course = Course.new(course_data)
+    redirect_to teachers_courses_path
   end
 
   def destroy
