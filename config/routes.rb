@@ -5,18 +5,22 @@ Rails.application.routes.draw do
 
   post '/registration', to: 'welcome#create_user'
 
-  get '/teacher/registration', to: 'teachers#new'
-
+  
   get '/logout', to: 'sessions#logout'
-
-  namespace :student do
-    resources :courses, only: [:show, :index]
-  end
-
-  namespace :teacher do
+  
+  namespace :teachers do
+    get '/registration', to: 'teachers#new'
+    # resources :courses, only: [:show]
+    # get '/courses/find', to: 'search#show'
     resources :courses, only: [:show, :index] do
       resources :students, only: [:show, :index]
     end
+    # get '/courses/:course_id', to: 'courses#show'
+    # get '/courses/:course_id/edit', to: 'courses#edit'
+    # patch '/courses/:course_id', to: 'courses#update'
   end
 
+  namespace :students do
+    resources :courses, only: [:show, :index, :create, :destroy]
+  end
 end

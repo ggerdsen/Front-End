@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Navigation Restrictions' do
   describe 'As a Visitor' do
     xit 'I can not visit the teacher dashboard' do
-      visit '/teacher/courses'
+      visit '/teachers/courses'
     end
 
     xit 'I can not visit the student dashboard' do
