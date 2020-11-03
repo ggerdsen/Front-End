@@ -5,3 +5,10 @@
     </section>
   <% end %>
 </section>
+<section id='add-courses'>
+  <%= form_with url: '/teachers/courses', method: :post do |f| %>
+    <%= f.text_field :name %>
+    <%= f.text_field :school_name %>
+    <%= f.submit 'Add Course' %>
+  <% end %>
+</section>
