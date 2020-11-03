@@ -17,10 +17,10 @@
         <%= link_to 'Log Out', logout_path %>
         <p>Welcome, <%= @current_user.first_name %></p>
         <% if current_student? %>
-          <%= link_to 'Student Dashboard', student_courses_path %>
+          <%= link_to 'Student Dashboard', students_courses_path %>
           <%# Add 'Settings' As extension %>
         <% elsif current_teacher? %>
-          <%= link_to 'Teacher Dashboard', teacher_courses_path %>
+          <%= link_to 'Teacher Dashboard', teachers_courses_path %>
           <%# Add 'Settings' As extension %>
         <% end %>
       <% end %>
