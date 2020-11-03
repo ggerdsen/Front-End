@@ -11,21 +11,41 @@ RSpec.describe 'Teachers course CRUD' do
     # courses:
     # id = 1 course name = Nursing kww7s7t5
     # id = 2 course name = Law 9dr7b6q4
+    # course1_name = 'Nursing'
+    # course2_name = 'Law'
 
-    course1_name = 'Nursing'
-    course2_name = 'Law'
+    # Chris's Postico
+    course1_name = 'Law'
+    course2_name = 'Creative Arts'
 
     within '#my-courses' do
       expect(page).to have_content(course1_name)
       expect(page).to have_content(course2_name)
     end
   end
-  # 
-  # scenario "a teacher can create and destroy a course" do
-  #   stub_omniauth
-  #   #stub_omniauth_teacher
-  #   visit teachers_courses_path
-  # end
-  #
-  # scenario "a teacher can edit a course"
+
+  scenario "a teacher can create and destroy courses on their dashboard " do
+    stub_omniauth
+    # stub_omniauth_teacher
+    visit teachers_courses_path
+
+    teacher_course_params = {
+      name: "Band 101",
+      school_name: "Jim Bob's Happy House"
+      }
+
+    within '#my-courses' do
+      expect(page).to_not have_content(teacher_course_params[:name])
+    end
+
+    fill_in :name, with: teacher_course_params[:name]
+    fill_in :school_name, with: teacher_course_params[:school_name]
+
+    click_on 'Add Course'
+    expect(current_path).to eq(teachers_courses_path)
+
+    within '#my-courses' do
+      expect(page).to have_content(teacher_course_params[:name])
+    end
+  end
 end
