@@ -51,8 +51,12 @@ RSpec.describe 'Teachers course CRUD' do
     end
 
     # Chris's postico courses end at 24, so this created course would be id 25
-    course1_id = 25
-
+    teacher_params = ({teacher_id: 1})
+    response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
+      request.body = teacher_params
+    end
+    courses = JSON.parse(response.body, symbolize_names: true)
+    course1_id = courses[:data].last[:id]
     within '#my-courses' do
       within "#course-#{course1_id}" do
         click_on 'Remove Course'
