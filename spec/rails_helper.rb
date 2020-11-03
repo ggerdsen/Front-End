@@ -5,8 +5,8 @@ require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
-require 'simplecov'
 require 'webmock/rspec'
+require 'simplecov'
 SimpleCov.start
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -112,7 +112,7 @@ def stub_teacher_omniauth
   OmniAuth.config.test_mode = true
   omniauth_google_hash = {
     provider: 'google_oauth2',
-    uid: '200000000000000000000',
+    uid: '104',
     info: {
     name: 'Sally Strong',
     email: 'strong@email.com',
@@ -130,6 +130,6 @@ def stub_teacher_omniauth
     expires: true
     }
   }
-    
+
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(omniauth_google_hash)
 end
