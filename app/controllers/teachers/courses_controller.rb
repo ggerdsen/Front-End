@@ -44,12 +44,11 @@ class Teachers::CoursesController < ApplicationController
     @course = Course.new(course_data)
   end
 
-  # def edit
-  #   response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:id]}")
-  #   course_data = JSON.parse(response.body, symbolize_names: true)
-  #
-  #   @course = Course.new(course_data)
-  # end
+  def edit
+    response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:id]}")
+    course_data = JSON.parse(response.body, symbolize_names: true)[:data]
+    @course = Course.new(course_data)
+  end
 
   def update
     response = conn("/api/v1/teachers/courses/#{params[:id]}").patch do |request|
