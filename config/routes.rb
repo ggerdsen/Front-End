@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   post '/registration', to: 'welcome#create_user'
 
-  get '/student/dashboard', to: 'students#dashboard'
+  namespace :student do
+    resources :courses, only: [:show, :index]
+   end
 
   get '/teacher/dashboard', to: 'teachers#dashboard'
 end
