@@ -29,7 +29,7 @@ RSpec.describe 'Students course CRUD' do
     end
 
     fill_in :enrollment, with: course_code
-    click_on 'Add Course'
+    click_on 'Enroll in Course'
     expect(current_path).to eq(students_courses_path)
     within '#my-classes' do
       expect(page).to have_content(course_name)
