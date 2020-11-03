@@ -1,11 +1,22 @@
 <section id='my-courses'>
   <% @courses.each do |course| %>
     <section id='course-<%=course.id%>'>
-    <%= course.name %>
-    <%= link_to 'Remove Course', "/teachers/courses/#{course.id}", method: :delete, data: { confirm: "Are you sure?" } %>
+    <ul>
+      <%= course.name %>
+    </ul>
+    <ul>
+      <%= course.school_name %>
+    </ul>
+    <ul>
+      <%= link_to 'Remove this Course', "/teachers/courses/#{course.id}", method: :delete, data: { confirm: "Are you sure?" } %>
+    </ul>
+    <ul>
+      <%= link_to 'Update this Course', "/teachers/courses/#{course.id}/edit" %>
+    </ul>
     </section>
   <% end %>
 </section>
+
 <section id='add-courses'>
   <%= form_with url: '/teachers/courses', method: :post do |f| %>
     <%= f.text_field :name %>
