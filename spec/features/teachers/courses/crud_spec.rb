@@ -2,25 +2,30 @@ require 'rails_helper'
 
 RSpec.describe 'Teachers course CRUD' do
   scenario "a teacher can see their dashboard (index action)" do
-    stub_omniauth
     # stub_omniauth_teacher
+    stub_omniauth
     visit teachers_courses_path
-    # Priyas Postico
-    # LOOK IN POSTICO FOR A TEACHER
-    # id = 1 teacher name = Joi
-    # courses:
-    # id = 1 course name = Nursing kww7s7t5
-    # id = 2 course name = Law 9dr7b6q4
-    # course1_name = 'Nursing'
-    # course2_name = 'Law'
 
-    # Chris's Postico
-    course1_name = 'Law'
-    course2_name = 'Creative Arts'
+    # teacher_params = ({teacher_id: current_user[:uid]})
+    teacher_params = ({teacher_id: 1})
+    response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
+      request.body = teacher_params
+    end
+    my_courses = JSON.parse(response.body, symbolize_names: true)
+    course1_name = my_courses[:data][0][:attributes][:name]
+    course2_name = my_courses[:data][0][:attributes][:name]
+
+    teacher_params = ({teacher_id: 2})
+    response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
+      request.body = teacher_params
+    end
+    not_my_courses = JSON.parse(response.body, symbolize_names: true)
+    course3_name = not_my_courses[:data][0][:attributes][:name]
 
     within '#my-courses' do
       expect(page).to have_content(course1_name)
       expect(page).to have_content(course2_name)
+      expect(page).to_not have_content(course3_name)
     end
   end
 
