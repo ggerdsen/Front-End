@@ -1,4 +1,25 @@
 class Teachers::CoursesController < ApplicationController
+  def conn(uri)
+    url = ENV['CLASS_WARS_DOMAIN'] + uri
+    Faraday.new(url)
+  end
+
+  def index
+    # Priyas Postico
+    teacher_id = 1
+    response = conn("/api/v1/teachers/#{teacher_id}").get
+    teacher = JSON.parse(response.body, symbolize_names: true)
+
+    teacher_course_params = {teacher_id: teacher[:data][:id].to_i}
+    response = conn("/api/v1/teachers/courses").get do |request|
+      request.body = teacher_course_params
+    end
+    json = JSON.parse(response.body, symbolize_names: true)
+    @courses = json[:data].map do |course_data|
+      Course.new(course_data)
+    end
+  end
+
   def show
     response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:id]}")
     course_data = JSON.parse(response.body, symbolize_names: true)

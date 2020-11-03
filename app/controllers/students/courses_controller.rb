@@ -7,7 +7,7 @@ class Students::CoursesController < ApplicationController
   def index
     # @student = current_user
     student_id = 4
-    # From postico (priyas local), student #20 is who we are using "Gala Schamberger"
+    # From postico (priyas local), student 4 is who we are using "Cinthia"
     # From postico (Saryn's local), student 4 is who grabbed (Fidel Ryan DDS)
     response = conn("/api/v1/students/#{student_id}").get
     student = JSON.parse(response.body, symbolize_names: true)
@@ -62,6 +62,25 @@ class Students::CoursesController < ApplicationController
     else
       # Sad Path
     end
+  end
+
+  def destroy
+    course_id = params[:id]
+    student_id = 4 # will be current user id eventually
+    response = conn("/api/v1/students/#{student_id}").get
+    student = JSON.parse(response.body, symbolize_names: true)
+
+    student_course_deletion_params = ({
+        course_id: course_id,
+        student_id: student[:data][:id].to_i,
+        student_points: 0
+      })
+
+    response = conn("/api/v1/students/courses/#{course_id}").delete do |request|
+      request.body = student_course_deletion_params
+    end
+    deletion = JSON.parse(response.body, symbolize_names: true)
+    redirect_to students_courses_path
   end
 
   private
