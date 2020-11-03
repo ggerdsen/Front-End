@@ -1,0 +1,12 @@
+<section id='my-classes'>
+  <% @courses.each do |course| %>
+    <%= course.name %>
+  <% end %>
+</section>
+
+<section id='options'>
+  <%= form_with url: "/students/courses", method: 'post' do |f| %>
+    <%= f.text_field :enrollment %>
+    <%= f.submit 'Add Course' %>
+  <% end %>
+</section>
