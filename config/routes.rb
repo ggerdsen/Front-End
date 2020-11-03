@@ -15,6 +15,6 @@ Rails.application.routes.draw do
   end
 
   namespace :students do
-    resources :courses, only: [:show, :index, :create]
+    resources :courses, only: [:show, :index, :create, :destroy]
   end
 end
