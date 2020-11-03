@@ -1,13 +1,13 @@
-<section id='my-classes'>
+<section id='my-courses'>
   <% @courses.each do |course| %>
-    <section id='class-<%=course.id%>'>
+    <section id='course-<%=course.id%>'>
     <%= course.name %>
     <%= link_to 'Unenroll in Course', "/students/courses/#{course.id}", method: :delete, data: { confirm: "Are you sure?" } %>
     </section>
   <% end %>
 </section>
 
-<section id='options'>
+<section id='add-course'>
   <%= form_with url: '/students/courses', method: :post do |f| %>
     <%= f.text_field :enrollment %>
     <%= f.submit 'Enroll in Course' %>
