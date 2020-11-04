@@ -3,10 +3,15 @@ Rails.application.routes.draw do
 
   get '/auth/google_oauth2/callback', to: 'sessions#create'
 
+  get '/logout', to: 'sessions#destroy'
+
+  post '/registration', to: 'welcome#create_user'
+
   namespace :teachers do
+    get '/registration', to: 'teachers#new'
     # resources :courses, only: [:show]
     # get '/courses/find', to: 'search#show'
-    resources :courses, only: [:show, :index] do
+    resources :courses do
       resources :students, only: [:show, :index]
     end
     # get '/courses/:course_id', to: 'courses#show'
@@ -15,6 +20,6 @@ Rails.application.routes.draw do
   end
 
   namespace :students do
-    resources :courses, only: [:show, :index, :create]
+    resources :courses, only: [:show, :index, :create, :destroy]
   end
 end
