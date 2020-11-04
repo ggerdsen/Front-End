@@ -159,14 +159,12 @@ RSpec.describe 'Teachers course CRUD' do
         click_on 'Course Show Page'
       end
     end
+    course2_name = course[:data][1][:attributes][:name]
+    course2_id = course[:data][1][:id]
 
     expect(current_path).to eq("/teachers/courses/#{course_id}")
     expect(page).to have_content(course_name)
+    expect(page).to_not have_content(course2_name)
 
-    # within '#my-courses' do
-    #   expect(page).to have_content(course1_name)
-    #   expect(page).to have_content(course2_name)
-    #   expect(page).to_not have_content(course3_name)
-    # end
   end
 end
