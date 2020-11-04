@@ -2,6 +2,10 @@
 
 # Front-End
 
+## Design
+
+1. One of the first and foremost design decisions was to split API calls into facades (where the API methods are called, and objects created if needed) and services (where the API's are actually called). This adheres more to the single line responsbility principle.
+
 ## Contributors
 <br>
 In no particular order...
