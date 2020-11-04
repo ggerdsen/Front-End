@@ -1,0 +1,81 @@
+{
+    "data": {
+        "id": "1",
+        "type": "student",
+        "attributes": {
+            "first_name": "Dana",
+            "last_name": "D'Amore",
+            "provider": "Google",
+            "uid": "1",
+            "email": "rolando@ebert-kulas.org",
+            "token": "pky80omydyip",
+            "refresh_token": "lh94ddjegwe7"
+        },
+        "relationships": {
+            "courses": {
+                "data": [
+                    {
+                        "id": "1",
+                        "type": "course"
+                    },
+                    {
+                        "id": "2",
+                        "type": "course"
+                    },
+                    {
+                        "id": "3",
+                        "type": "course"
+                    },
+                    {
+                        "id": "4",
+                        "type": "course"
+                    },
+                    {
+                        "id": "5",
+                        "type": "course"
+                    },
+                    {
+                        "id": "6",
+                        "type": "course"
+                    },
+                    {
+                        "id": "7",
+                        "type": "course"
+                    },
+                    {
+                        "id": "8",
+                        "type": "course"
+                    },
+                    {
+                        "id": "9",
+                        "type": "course"
+                    },
+                    {
+                        "id": "10",
+                        "type": "course"
+                    },
+                    {
+                        "id": "11",
+                        "type": "course"
+                    },
+                    {
+                        "id": "12",
+                        "type": "course"
+                    },
+                    {
+                        "id": "13",
+                        "type": "course"
+                    },
+                    {
+                        "id": "14",
+                        "type": "course"
+                    },
+                    {
+                        "id": "15",
+                        "type": "course"
+                    }
+                ]
+            }
+        }
+    }
+}

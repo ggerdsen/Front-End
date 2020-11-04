@@ -1,21 +1,28 @@
 class SessionsController < ApplicationController
   def create
     body = {
-      client_id: ENV['GOOGLE_CLIENT_ID'],
-      client_secret: ENV['GOOGLE_CLIENT_SECRET'],
-      access_token: request.env['omniauth.auth']
-    }
-    id = request.env['omniauth.auth'][:uid]
-    session[:uid] = id
+              client_id: ENV['GOOGLE_CLIENT_ID'],
+              client_secret: ENV['GOOGLE_CLIENT_SECRET'],
+              user_data: request.env['omniauth.auth']
+            }
+
+    uid = request.env['omniauth.auth'][:uid]
+    session[:uid] = uid
 
     response = Faraday.post("http://localhost:3000/api/v1/#{session[:user_type]}") do |request|
-      request.body = body
+      request.body = JSON.generate(body)
     end
 
     if session[:user_type] == 'students'
       redirect_to '/students/courses'
-    else
-      redirect_to '/teachers/registration'
+    else session[:user_type] == 'teachers'
+      redirect_to '/teachers/courses'
     end
+  end
+
+  def destroy
+    session[:user_type] == ''
+    session.destroy
+    redirect_to root_path
   end
 end

@@ -1,0 +1,76 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:3000/api/v1/teachers
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"<GOOGLE_CLIENT>","client_secret":"<GOOGLE_SECRET>","user_data":{"provider":"google_oauth2","uid":"104","info":{"name":"Sally
+        Strong","email":"strong@email.com","first_name":"Sally","last_name":"Strong","image":"https://lh4.googleusercontent.com/photo.jpg","urls":{"google":"https://plus.google.com/+SallyStrong"}},"credentials":{"token":"MOCK_OMNIAUTH_GOOGLE_TOKEN","refresh_token":"MOCK_OMNIAUTH_GOOGLE_REFRESH
+        TOKEN","expires_at":"2020-11-03T16:15:50-06:00","expires":true}}}'
+    headers:
+      User-Agent:
+      - Faraday v1.1.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"6fc96ecbd0a9f7b1082631b4e5d146e5"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 0c7304e4-7ed0-464e-a944-b350cd07b818
+      X-Runtime:
+      - '0.177035'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":{"id":null,"type":"teacher","attributes":{"first_name":"Sally","last_name":"Strong","provider":"google_oauth2","uid":"104","email":"strong@email.com","token":"MOCK_OMNIAUTH_GOOGLE_TOKEN","refresh_token":null,"school_name":null,"school_district":null},"relationships":{"courses":{"data":[]}}}}'
+  recorded_at: Tue, 03 Nov 2020 22:15:50 GMT
+- request:
+    method: get
+    uri: http://localhost:3000/api/v1/teachers/find/104
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.1.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"496336ba9028d97a8a6a21d741cc2a39"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 3a1eb1a1-f937-46d7-a7a7-fd02a1f14dee
+      X-Runtime:
+      - '0.005874'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"data":{"id":"5","type":"teacher","attributes":{"first_name":"Columbus","last_name":"Blick","provider":"Google","uid":"104","email":"eldon@borer.co","token":"a49nq8p986wz","refresh_token":"lav6n0nxz1t0","school_name":"Ostbarrow
+        College","school_district":"Lazaroport"},"relationships":{"courses":{"data":[{"id":"13","type":"course"},{"id":"14","type":"course"},{"id":"15","type":"course"}]}}}}'
+  recorded_at: Tue, 03 Nov 2020 22:15:50 GMT
+recorded_with: VCR 6.0.0

@@ -1,0 +1,35 @@
+{
+    "data": {
+        "id": "3",
+        "type": "teacher",
+        "attributes": {
+            "first_name": "Mufasa",
+            "last_name": "Mann",
+            "provider": "Google",
+            "uid": "102",
+            "email": "mufasayoface@email.com",
+            "token": "0jr2991ytluk",
+            "refresh_token": null,
+            "school_name": null,
+            "school_district": null
+        },
+        "relationships": {
+            "courses": {
+                "data": [
+                    {
+                        "id": "4",
+                        "type": "course"
+                    },
+                    {
+                        "id": "5",
+                        "type": "course"
+                    },
+                    {
+                        "id": "6",
+                        "type": "course"
+                    }
+                ]
+            }
+        }
+    }
+}

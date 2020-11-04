@@ -5,10 +5,10 @@ class ApplicationController < ActionController::Base
                 :current_teacher?,
                 :current_student?
   def current_user
-    if session[:user_type] == 'teachers'
-      @current_user ||= Teacher.find(session[:uid]) if session[:uid]
+    if session[:user_type] == 'students'
+      @current_user ||= StudentFacade.find(session[:uid]) if session[:uid]
     else
-      @current_user ||= Student.find(session[:uid]) if session[:uid]
+      @current_user ||= TeacherFacade.find(session[:uid]) if session[:uid]
     end
   end
 
