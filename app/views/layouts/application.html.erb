@@ -16,7 +16,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <% if current_user %>
         <%= link_to 'Log Out', logout_path %>
-        <p>Welcome, <%= @current_user.first_name %></p>
+        <p>Welcome, <%= current_user.first_name %></p>
         <% if current_student? %>
           <%= link_to 'Student Dashboard', students_courses_path %>
           <%# Add 'Settings' As extension %>

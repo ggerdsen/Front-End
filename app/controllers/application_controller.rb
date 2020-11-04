@@ -13,11 +13,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_student?
-    current_user && current_user.student_id
+    current_user && current_user.role == "student"
   end
 
   def current_teacher?
-    current_user && current_user.teacher_id
+    current_user && current_user.role == "teacher"
   end
 
   def require_user
@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
 
   def require_teacher
     render file: 'public/404', status: 404 unless current_teacher?
+  end
+
+  def require_student
+    render file: 'public/404', status: 404 unless current_student?
   end
 
   def generate_flash(resource)
