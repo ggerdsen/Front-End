@@ -1,2 +1,8 @@
 <h1>Welcome</h1>
-<%= link_to "Sign in with Google", "/auth/google_oauth2" %>
+
+<%= form_tag "/registration" %>
+<p>
+  <%= radio_button_tag :user_type, 'students' %> I am a student
+  <%= radio_button_tag :user_type, 'teachers' %> I am a teacher
+</p>
+<%= submit_tag "Sign in with Google" %>
