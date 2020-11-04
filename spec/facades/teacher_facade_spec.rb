@@ -4,7 +4,7 @@ describe TeacherFacade do
   it "returns student user object" do
     uid = 100
     response = File.read("spec/fixtures/teacher.json")
-    stub_request(:get, "http://localhost:3000/api/v1/teachers/find/#{uid}").to_return(status: 200, body: response, headers: {})
+    stub_request(:get, "https://git.heroku.com/polar-anchorage-12813.git/api/v1/teachers/find/#{uid}").to_return(status: 200, body: response, headers: {})
     teacher = TeacherFacade.find(uid)
 
     expect(teacher).to be_a(Teacher)

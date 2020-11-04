@@ -11,14 +11,14 @@ RSpec.describe 'Students course CRUD' do
     student = StudentFacade.find(stub_student_omniauth[:uid])
 
     student_params = ({student_id: student.id})
-    response = Faraday.get('http://localhost:3000/api/v1/students/courses') do |request|
+    response = Faraday.get('https://git.heroku.com/polar-anchorage-12813.git/api/v1/students/courses') do |request|
       request.body = student_params
     end
     my_courses = JSON.parse(response.body, symbolize_names: true)
     course1_name = my_courses[:data][0][:attributes][:name]
 
     student_params = ({student_id: 2})
-    response = Faraday.get('http://localhost:3000/api/v1/students/courses') do |request|
+    response = Faraday.get('https://git.heroku.com/polar-anchorage-12813.git/api/v1/students/courses') do |request|
       request.body = student_params
     end
     not_my_courses = JSON.parse(response.body, symbolize_names: true)
@@ -39,14 +39,14 @@ RSpec.describe 'Students course CRUD' do
     expect(current_path).to eq(students_courses_path)
     student = StudentFacade.find(stub_student_omniauth[:uid])
     student_params = ({student_id: student.id})
-    response = Faraday.get('http://localhost:3000/api/v1/students/courses') do |request|
+    response = Faraday.get('https://git.heroku.com/polar-anchorage-12813.git/api/v1/students/courses') do |request|
       request.body = student_params
     end
     my_courses = JSON.parse(response.body, symbolize_names: true)
     course1_name = my_courses[:data][0][:attributes][:name]
 
     student_params = ({student_id: 2})
-    response = Faraday.get('http://localhost:3000/api/v1/students/courses') do |request|
+    response = Faraday.get('https://git.heroku.com/polar-anchorage-12813.git/api/v1/students/courses') do |request|
       request.body = student_params
     end
     not_my_courses = JSON.parse(response.body, symbolize_names: true)
@@ -92,7 +92,7 @@ RSpec.describe 'Students course CRUD' do
     expect(current_path).to eq(students_courses_path)
     student = StudentFacade.find(stub_student_omniauth[:uid])
     student_params = ({student_id: student.id})
-    response = Faraday.get('http://localhost:3000/api/v1/students/courses') do |request|
+    response = Faraday.get('https://git.heroku.com/polar-anchorage-12813.git/api/v1/students/courses') do |request|
       request.body = student_params
     end
     course = JSON.parse(response.body, symbolize_names: true)

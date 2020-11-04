@@ -49,12 +49,12 @@ class Students::CoursesController < ApplicationController
 
   def show
     @student = current_user
-    response = Faraday.get("http://localhost:3000/api/v1/students/courses/#{params[:id]}")
+    response = Faraday.get("https://git.heroku.com/polar-anchorage-12813.git/api/v1/students/courses/#{params[:id]}")
     course_data = JSON.parse(response.body, symbolize_names: true)[:data]
     @course = Course.new(course_data)
 
     teacher_id = @course.teacher_id
-    response = Faraday.get("http://localhost:3000/api/v1/teachers/#{teacher_id}")
+    response = Faraday.get("https://git.heroku.com/polar-anchorage-12813.git/api/v1/teachers/#{teacher_id}")
     teacher_data = JSON.parse(response.body, symbolize_names: true)
     @teacher = Teacher.new(teacher_data)
     ### Still need to add Prizes, Poms, and Class Wars

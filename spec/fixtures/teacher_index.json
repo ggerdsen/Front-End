@@ -1,0 +1,66 @@
+{
+    "data": [
+        {
+            "id": "2",
+            "type": "course",
+            "attributes": {
+                "teacher_id": 1,
+                "name": "Forensic Science",
+                "course_code": "p8n86orE",
+                "school_name": "Bluemeadow TAFE",
+                "course_points": 83941
+            },
+            "relationships": {
+                "students": {
+                    "data": [
+                        {
+                            "id": "8",
+                            "type": "student"
+                        }
+                    ]
+                },
+                "teacher": {
+                    "data": {
+                        "id": "1",
+                        "type": "teacher"
+                    }
+                }
+            }
+        },
+        {
+            "id": "1",
+            "type": "course",
+            "attributes": {
+                "teacher_id": 1,
+                "name": "Psychology",
+                "course_code": "nLo7shZj",
+                "school_name": "Marblewald TAFE",
+                "course_points": 83206
+            },
+            "relationships": {
+                "students": {
+                    "data": [
+                        {
+                            "id": "1",
+                            "type": "student"
+                        },
+                        {
+                            "id": "14",
+                            "type": "student"
+                        },
+                        {
+                            "id": "17",
+                            "type": "student"
+                        }
+                    ]
+                },
+                "teacher": {
+                    "data": {
+                        "id": "1",
+                        "type": "teacher"
+                    }
+                }
+            }
+        }
+    ]
+}

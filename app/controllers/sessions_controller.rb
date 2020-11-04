@@ -8,8 +8,7 @@ class SessionsController < ApplicationController
 
     uid = request.env['omniauth.auth'][:uid]
     session[:uid] = uid
-
-    response = Faraday.post("http://localhost:3000/api/v1/#{session[:user_type]}") do |request|
+    response = Faraday.post("https://git.heroku.com/polar-anchorage-12813.git/api/v1/#{session[:user_type]}") do |request|
       request.body = JSON.generate(body)
     end
 
@@ -18,6 +17,7 @@ class SessionsController < ApplicationController
     else session[:user_type] == 'teachers'
       redirect_to '/teachers/courses'
     end
+
   end
 
   def destroy

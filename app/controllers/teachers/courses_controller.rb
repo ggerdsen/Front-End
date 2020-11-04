@@ -11,7 +11,7 @@ class Teachers::CoursesController < ApplicationController
   end
 
   def show
-    response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:id]}")
+    response = Faraday.get("https://git.heroku.com/polar-anchorage-12813.git/api/v1/teachers/courses/#{params[:id]}")
     course_data = JSON.parse(response.body, symbolize_names: true)[:data]
     @course = Course.new(course_data)
   end
