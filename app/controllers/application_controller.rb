@@ -28,5 +28,4 @@ class ApplicationController < ActionController::Base
       flash[validation] = "#{validation}: #{message}"
     end
   end
-
 end
