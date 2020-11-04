@@ -5,7 +5,7 @@ class Teachers::CoursesController < ApplicationController
   end
 
   def index
-    teacher_id = 1
+    teacher_id = 14
     response = conn("/api/v1/teachers/#{teacher_id}").get
     teacher = JSON.parse(response.body, symbolize_names: true)
 
@@ -20,7 +20,7 @@ class Teachers::CoursesController < ApplicationController
   end
 
   def create
-    teacher_id = 1
+    teacher_id = 14
     response = conn("/api/v1/teachers/#{teacher_id}").get
     teacher = JSON.parse(response.body, symbolize_names: true)
 
@@ -40,7 +40,7 @@ class Teachers::CoursesController < ApplicationController
 
   def show
     response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:id]}")
-    course_data = JSON.parse(response.body, symbolize_names: true)
+    course_data = JSON.parse(response.body, symbolize_names: true)[:data]
     @course = Course.new(course_data)
   end
 

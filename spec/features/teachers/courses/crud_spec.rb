@@ -140,4 +140,31 @@ RSpec.describe 'Teachers course CRUD' do
     fill_in :school_name, with: update_params[:school_name]
     click_on 'Update Course'
   end
+
+  scenario 'a teacher can view a single courses show page' do
+    stub_omniauth
+    visit teachers_courses_path
+
+    # teacher_params = ({teacher_id: current_user[:uid]})
+    teacher_params = ({teacher_id: 14})
+    response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
+      request.body = teacher_params
+    end
+    course = JSON.parse(response.body, symbolize_names: true)
+
+    course_name = course[:data][0][:attributes][:name]
+    course_id = course[:data][0][:id]
+    within '#my-courses' do
+      within "#course-#{course_id}" do
+        click_on 'Course Show Page'
+      end
+    end
+    course2_name = course[:data][1][:attributes][:name]
+    course2_id = course[:data][1][:id]
+
+    expect(current_path).to eq("/teachers/courses/#{course_id}")
+    expect(page).to have_content(course_name)
+    expect(page).to_not have_content(course2_name)
+
+  end
 end
