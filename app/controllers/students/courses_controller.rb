@@ -5,6 +5,7 @@ class Students::CoursesController < ApplicationController
   end
 
   def index
+    current_user
     # @student = current_user
     student_id = 4
     # From postico (priyas local), student 4 is who we are using "Cinthia"
@@ -66,8 +67,7 @@ class Students::CoursesController < ApplicationController
 
   
   def show
-    binding.pry
-
+    current_user
     response = Faraday.get("http://localhost:3000/api/v1/students/courses/#{params[:id]}")
     
     course_data = JSON.parse(response.body, symbolize_names: true)[:data]
