@@ -7,13 +7,11 @@ Rails.application.routes.draw do
 
   post '/registration', to: 'welcome#create_user'
 
-  namespace :student do
+  namespace :students do
     resources :courses, only: [:show, :index]
    end
 
-   resources :teacher, only: [:update]
-
-  namespace :teacher do
+  namespace :teachers do
     resources :courses, only: [:show, :index]
   end
 end

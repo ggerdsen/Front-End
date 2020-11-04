@@ -14,7 +14,7 @@ RSpec.describe "teacher login" do
 
         expect(page).to have_content("Columbus")
         expect(page).to have_button("Log Out")
-        expect(current_path).to eq("/teacher/courses")
+        expect(current_path).to eq("/teachers/courses")
       end
     end
 
@@ -28,7 +28,7 @@ RSpec.describe "teacher login" do
 
         click_on "Sign in with Google"
 
-        expect(current_path).to eq("/teacher/courses")
+        expect(current_path).to eq("/teachers/courses")
 
         click_button "Log Out"
 
