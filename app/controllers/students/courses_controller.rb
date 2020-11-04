@@ -64,6 +64,16 @@ class Students::CoursesController < ApplicationController
     end
   end
 
+  
+  def show
+    binding.pry
+
+    response = Faraday.get("http://localhost:3000/api/v1/students/courses/#{params[:id]}")
+    
+    course_data = JSON.parse(response.body, symbolize_names: true)[:data]
+    @course = Course.new(course_data)
+  end
+
   def destroy
     course_id = params[:id]
     student_id = 4 # will be current user id eventually
