@@ -1,12 +1,12 @@
 class Teachers::CoursesController < ApplicationController
   def index
-    teacher_id = 1
-    @courses = TeachersFacade.get_all_courses(teacher_id)
+    @teacher = current_user
+    @courses = TeachersFacade.get_all_courses(@teacher.id)
   end
 
   def create
-    teacher_id = 1
-    TeachersFacade.post_new_course(course_params, params[:id], teacher_id)
+    @teacher = current_user
+    TeachersFacade.post_new_course(course_params, params[:id], @teacher.id)
     redirect_to teachers_courses_path
   end
 

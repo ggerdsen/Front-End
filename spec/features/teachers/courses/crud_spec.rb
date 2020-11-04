@@ -2,8 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'Teachers course CRUD' do
   scenario "a teacher can see their dashboard (index action)" do
-    # stub_omniauth_teacher
-    stub_omniauth
+    stub_teacher_omniauth
+    visit root_path
+    choose(option: 'teachers')
+    click_on "Sign in with Google"
+
     visit teachers_courses_path
 
     # teacher_params = ({teacher_id: current_user[:uid]})
@@ -30,8 +33,11 @@ RSpec.describe 'Teachers course CRUD' do
   end
 
   scenario "a teacher can create and destroy courses on their dashboard " do
-    # stub_omniauth_teacher
-    stub_omniauth
+    stub_teacher_omniauth
+    visit root_path
+    choose(option: 'teachers')
+    click_on "Sign in with Google"
+
     visit teachers_courses_path
 
     teacher_course_params = {
@@ -77,8 +83,11 @@ RSpec.describe 'Teachers course CRUD' do
   end
 
   scenario 'a teacher can update names on courses' do
-    # stub_omniauth_teacher
-    stub_omniauth
+    stub_teacher_omniauth
+    visit root_path
+    choose(option: 'teachers')
+    click_on "Sign in with Google"
+
     visit teachers_courses_path
 
     # GET COURSE INFORMATION
@@ -142,7 +151,11 @@ RSpec.describe 'Teachers course CRUD' do
   end
 
   scenario 'a teacher can view a single courses show page' do
-    stub_omniauth
+    stub_teacher_omniauth
+    visit root_path
+    choose(option: 'teachers')
+    click_on "Sign in with Google"
+
     visit teachers_courses_path
 
     # teacher_params = ({teacher_id: current_user[:uid]})
