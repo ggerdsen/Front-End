@@ -5,7 +5,7 @@ class Teachers::CoursesController < ApplicationController
   end
 
   def index
-    teacher_id = 14
+    teacher_id = 1
     response = conn("/api/v1/teachers/#{teacher_id}").get
     teacher = JSON.parse(response.body, symbolize_names: true)
 
@@ -20,7 +20,7 @@ class Teachers::CoursesController < ApplicationController
   end
 
   def create
-    teacher_id = 14
+    teacher_id = 1
     response = conn("/api/v1/teachers/#{teacher_id}").get
     teacher = JSON.parse(response.body, symbolize_names: true)
 
