@@ -86,15 +86,15 @@ def stub_student_omniauth
   OmniAuth.config.test_mode = true
   omniauth_google_hash = {
     provider: 'google_oauth2',
-    uid: '20',
+    uid: '52034',
     info: {
-    name: 'John Smith',
-    email: 'john@example.com',
-    first_name: 'John',
-    last_name: 'Smith',
+    name: 'Fredda Leffler',
+    email: 'soila@kuvalis.co',
+    first_name: 'Fredda',
+    last_name: 'Leffler',
     image: 'https://lh4.googleusercontent.com/photo.jpg',
     urls: {
-    google: 'https://plus.google.com/+JohnSmith'
+    google: 'https://plus.google.com/+FreddaLeffler'
     }
     },
     credentials: {
@@ -112,15 +112,15 @@ def stub_teacher_omniauth
   OmniAuth.config.test_mode = true
   omniauth_google_hash = {
     provider: 'google_oauth2',
-    uid: '104',
+    uid: '23276',
     info: {
-    name: 'Sally Strong',
+    name: 'Sammie MacGyver',
     email: 'strong@email.com',
-    first_name: 'Sally',
-    last_name: 'Strong',
+    first_name: 'Sammie',
+    last_name: 'MacGyver',
     image: 'https://lh4.googleusercontent.com/photo.jpg',
     urls: {
-    google: 'https://plus.google.com/+SallyStrong'
+    google: 'https://plus.google.com/+SammieMacGyver'
     }
     },
     credentials: {
