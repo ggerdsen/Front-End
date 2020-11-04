@@ -5,18 +5,19 @@ class Students::CoursesController < ApplicationController
   end
 
   def index
-    student_id = 1 # @student = current_user[:uid]
-    response = conn("/api/v1/students/#{student_id}").get
+    @student = current_user
+    response = conn("/api/v1/students/#{@student.id}").get
     student = JSON.parse(response.body, symbolize_names: true)
     student_course_params = {student_id: student[:data][:id].to_i}
     response = conn("/api/v1/students/courses").get do |request|
       request.body = student_course_params
     end
     json = JSON.parse(response.body, symbolize_names: true)
-
     @courses = json[:data].map do |course_data|
       Course.new(course_data)
     end
+
+    @poms = []
   end
 
   def create
@@ -25,8 +26,8 @@ class Students::CoursesController < ApplicationController
 
     if !exists[:data].nil?
       course = JSON.parse(response.body, symbolize_names: true)
-      student_id = 1 # student = current_user[:uid]
-      response = conn("/api/v1/students/#{student_id}").get
+      @student = current_user
+      response = conn("/api/v1/students/#{@student.id}").get
       student = JSON.parse(response.body, symbolize_names: true)
 
       student_course_creation_params = {
@@ -47,7 +48,7 @@ class Students::CoursesController < ApplicationController
 
 
   def show
-    current_user
+    @student = current_user
     response = Faraday.get("http://localhost:3000/api/v1/students/courses/#{params[:id]}")
 
     course_data = JSON.parse(response.body, symbolize_names: true)[:data]
@@ -56,17 +57,13 @@ class Students::CoursesController < ApplicationController
 
   def destroy
     course_id = params[:id]
-    student_id = 1 # student_id = current_user[:uid]
-    response = conn("/api/v1/students/#{student_id}").get
-    student = JSON.parse(response.body, symbolize_names: true)
-
+    @student = current_user
     student_course_deletion_params = ({
         course_id: course_id,
-        student_id: student[:data][:id].to_i,
-        student_points: 0
+        student_id: @student.id
       })
 
-    response = conn("/api/v1/students/courses/#{course_id}").delete do |request|
+    conn("/api/v1/students/courses/#{course_id}").delete do |request|
       request.body = student_course_deletion_params
     end
     redirect_to students_courses_path
