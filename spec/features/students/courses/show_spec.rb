@@ -14,7 +14,7 @@ RSpec.describe 'Student Course Dashboard' do
     # end
 
     scenario 'a teacher can view a single courses show page' do
-      stub_omniauth
+      stub_student_omniauth
       visit students_courses_path
       student_params = ({student_id: 1})
       response = Faraday.get('http://localhost:3000/api/v1/students/courses') do |request|
