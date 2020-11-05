@@ -17,8 +17,39 @@ class TeachersFacade
     TeachersService.create_course(teacher_course_creation_params, id)
   end
 
+  def self.post_new_war(data, challenger_course_id, teacher_id)
+    teacher = get_teacher(teacher_id)
+    challenger_course = get_course(challenger_course_id)
+    opponent_course = find_course_by_code(data[:opponent_course_code])
+    war_params = {
+      challenger_course_id: challenger_course_id.to_i,
+      opponent_course_id: opponent_course.id.to_i,
+      challenger_course_points: challenger_course.course_points,
+      opponent_course_points: opponent_course.course_points
+    }
+    war_data = TeachersService.create_war(war_params, teacher[:data][:id])
+    War.new(war_data)
+  end
+
+  def self.get_all_wars(id)
+    teacher = TeachersService.get_teacher(id)
+    json = TeachersService.get_all_wars(teacher)
+    @wars = json.map do |course_data|
+      War.new(course_data)
+    end
+  end
+
+  def self.destroy_war(id)
+    TeachersService.destroy_war(id)
+  end
+
   def self.get_teacher(id)
     TeachersService.get_teacher(id)
+  end
+
+  def self.get_course(id)
+    course_data = TeachersService.get_single_course(id)
+    Course.new(course_data)
   end
 
   def self.edit_course(id)
@@ -33,5 +64,10 @@ class TeachersFacade
 
   def self.destroy_course(id)
     TeachersService.destroy_course(id)
+  end
+
+  def self.find_course_by_code(code)
+    course_data = TeachersService.course_by_code(code)
+    Course.new(course_data)
   end
 end
