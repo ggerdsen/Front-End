@@ -1,15 +1,42 @@
 <!DOCTYPE html>
+
 <html>
   <head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>FrontEnd</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
-
   <body>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <div class="bg"></div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <% if current_user %>
+        <%= link_to 'Log Out', logout_path %>
+        <p>Welcome, <%= current_user.first_name %></p>
+        <% if current_student? %>
+          <%= link_to 'Student Dashboard', students_courses_path %>
+          <%# Add 'Settings' As extension %>
+        <% elsif current_teacher? %>
+          <%= link_to 'Teacher Dashboard', teachers_courses_path %>
+          <%# Add 'Settings' As extension %>
+        <% end %>
+      <% end %>
+    </nav>
+    <% flash.each do |type, message| %>
+    <div class="alert alert-danger" role="alert">
+    <p><%= message %></p>
+    </div>
+    <% end %>
     <%= yield %>
-  </body>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous">
+    </script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    </body>
 </html>
