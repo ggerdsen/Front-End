@@ -21,7 +21,15 @@
 
 ## Set up
 
-1. Herokue: https://git.heroku.com/sleepy-forest-61862.git
+1. Make sure you have the correct Ruby version installed (2.5.3). To check your Ruby version, from your command line, run `ruby -v`
+  - If you do not have the correct version, follow the instructions to install 2.5.3: from the command line, run `rbenv install 2.5.3`
+2. Make sure you have the correct Rails version installed (5.2.4.3). To check your Rails version, from your command line, run `rails -v`
+  - If you do not have the correct Rails version, [follow these instructions to install 2.5.4.3](https://github.com/turingschool-examples/task_manager_rails/blob/master/rails_uninstall.md)
+3. Fork and Clone this repo
+4. Install gem packages: `bundle install`
+5. Setup the database: `rails db:create`
+
+[Heroku app fond here](https://git.heroku.com/sleepy-forest-61862.git)
 
 ## Contributors
 <br>

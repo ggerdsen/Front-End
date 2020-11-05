@@ -8,7 +8,7 @@ class Teachers::CoursesController < ApplicationController
   def create
     @teacher = current_user
     TeachersFacade.post_new_course(course_params, params[:id], @teacher.id)
-    redirect_to teachers_courses_path
+    redirect_to '/teachers/courses'
   end
 
   def show
