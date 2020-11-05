@@ -1,0 +1,24 @@
+{
+    "data": {
+        "id": "29",
+        "type": "course",
+        "attributes": {
+            "teacher_id": 1,
+            "name": "\"Band 101\"",
+            "course_code": "GLbz1TV0",
+            "school_name": "\"Jim Bob's Happy House\"",
+            "course_points": 0
+        },
+        "relationships": {
+            "students": {
+                "data": []
+            },
+            "teacher": {
+                "data": {
+                    "id": "1",
+                    "type": "teacher"
+                }
+            }
+        }
+    }
+}
