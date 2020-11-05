@@ -16,17 +16,15 @@ RSpec.describe 'Student Points' do
     end
 
     my_courses = JSON.parse(response.body, symbolize_names: true)
-    course1_id = my_courses[:data][0][:id]
+    course1_id = my_courses[:data][0][:id].to_i
 
-    # course_params = ({student_id: 2})
     joins_params = ({student_id: student.id, course_id: course1_id})
     response = Faraday.get('http://localhost:3000/api/v1/students/courses/points') do |request|
       request.body = joins_params
     end
-require "pry"; binding.pry
-    within '#my-courses' do
-      # expect(page).to have_button(course1_name)
-      # expect(page).to_not have_button(course2_name)
+    my_student_course = JSON.parse(response.body, symbolize_names: true)
+    within '#my-points' do
+      expect(page).to have_content(my_student_course[:data][0][:attributes][:student_points])
     end
   end
 end
