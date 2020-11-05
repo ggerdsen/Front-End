@@ -20,27 +20,21 @@ RSpec.describe 'Teachers course CRUD' do
    'User-Agent'=>'Faraday v1.1.0'
     }).
   to_return(status: 200, body: json4, headers: {})
+
     visit root_path
     choose(option: 'teachers')
     click_on "Sign in with Google"
-    require "pry"; binding.pry
 
     visit teachers_courses_path
 
-    # teacher_params = ({teacher_id: current_user[:uid]})
-    teacher_params = ({teacher_id: 1})
-    response = Faraday.get('/api/v1/teachers/courses') do |request|
-      request.body = teacher_params
-    end
-    my_courses = JSON.parse(response.body, symbolize_names: true)
+    my_courses = JSON.parse(json4, symbolize_names: true)
+
     course1_name = my_courses[:data][0][:attributes][:name]
     course2_name = my_courses[:data][0][:attributes][:name]
+    
+    json5 = File.read('spec/fixtures/teacher_courses2.json')
 
-    teacher_params = ({teacher_id: 2})
-    response = Faraday.get('/api/v1/teachers/courses') do |request|
-      request.body = teacher_params
-    end
-    not_my_courses = JSON.parse(response.body, symbolize_names: true)
+    not_my_courses = JSON.parse(json5, symbolize_names: true)
     course3_name = not_my_courses[:data][0][:attributes][:name]
 
     within '#my-courses' do

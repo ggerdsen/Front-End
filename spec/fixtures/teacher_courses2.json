@@ -1,0 +1,58 @@
+{
+    "data": [
+        {
+            "id": "3",
+            "type": "course",
+            "attributes": {
+                "teacher_id": 2,
+                "name": "Applied Science (Psychology)",
+                "course_code": "ngj29RS6",
+                "school_name": "Flowerlake College",
+                "course_points": 36055
+            },
+            "relationships": {
+                "students": {
+                    "data": [
+                        {
+                            "id": "18",
+                            "type": "student"
+                        }
+                    ]
+                },
+                "teacher": {
+                    "data": {
+                        "id": "2",
+                        "type": "teacher"
+                    }
+                }
+            }
+        },
+        {
+            "id": "4",
+            "type": "course",
+            "attributes": {
+                "teacher_id": 2,
+                "name": "Engineering",
+                "course_code": "iXD7zFv7",
+                "school_name": "Ostbarrow University",
+                "course_points": 9062
+            },
+            "relationships": {
+                "students": {
+                    "data": [
+                        {
+                            "id": "19",
+                            "type": "student"
+                        }
+                    ]
+                },
+                "teacher": {
+                    "data": {
+                        "id": "2",
+                        "type": "teacher"
+                    }
+                }
+            }
+        }
+    ]
+}
