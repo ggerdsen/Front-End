@@ -2,6 +2,7 @@ class Teachers::CoursesController < ApplicationController
   def index
     @teacher = current_user
     @courses = TeachersFacade.get_all_courses(@teacher.id)
+    @wars = TeachersFacade.get_all_wars(@teacher.id)
   end
 
   def create
@@ -37,9 +38,24 @@ class Teachers::CoursesController < ApplicationController
     redirect_to teachers_courses_path
   end
 
+  def create_war
+    @teacher = current_user
+    TeachersFacade.post_new_war(war_params, params[:id], @teacher.id)
+    redirect_to teachers_courses_path
+  end
+
+  def destroy_war
+    TeachersFacade.destroy_war(params[:id])
+    redirect_to teachers_courses_path
+  end
+
   private
 
   def course_params
     params.permit(:name, :school_name, :teacher_id)
+  end
+
+  def war_params
+    params.permit(:opponent_course_code)
   end
 end
