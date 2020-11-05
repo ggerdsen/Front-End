@@ -36,4 +36,28 @@ RSpec.describe 'Student Points' do
       expect(page).to have_content(my_student_course[:data][0][:attributes][:student_points])
     end
   end
+
+  scenario 'a student can see their total points on their dashboard (course index)' do
+    stub_student_omniauth
+    visit root_path
+    choose(option: 'students')
+    click_on "Sign in with Google"
+
+    expect(current_path).to eq(students_courses_path)
+
+    student = StudentFacade.find(stub_student_omniauth[:uid])
+
+    joins_params = ({student_id: student.id})
+    response = Faraday.get('http://localhost:3000/api/v1/students/courses/all-points') do |request|
+      request.body = joins_params
+    end
+
+    my_student_courses = JSON.parse(response.body, symbolize_names: true)[:data]
+
+    returned_points = my_student_courses[0][:attributes][:student_points] + my_student_courses[1][:attributes][:student_points] + my_student_courses[2][:attributes][:student_points]
+
+    within '#my-points' do
+      expect(page).to have_content(returned_points)
+    end
+  end
 end
