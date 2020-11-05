@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+ body, html {
+  height: 100%;
+}
+
+.bg { 
+  /* The image used */
+  background-image: url("https://cdn.hipwallpaper.com/i/7/53/65xgAV.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
