@@ -22,7 +22,7 @@ describe Student do
 
   it "exists with attributes" do
     expect(@student).to be_a(Student)
-    expect(@student.id).to eq("1")
+    expect(@student.id).to eq(1)
     expect(@student.provider).to eq("google_oauth2")
     expect(@student.uid).to eq("1057629160")
     expect(@student.email).to eq("boom@email.com")

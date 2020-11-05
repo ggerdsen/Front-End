@@ -8,7 +8,7 @@ describe StudentFacade do
     student = StudentFacade.find(uid)
 
     expect(student).to be_a(Student)
-    expect(student.id).to be_a(String)
+    expect(student.id).to be_an(Integer)
     expect(student.provider).to be_a(String)
     expect(student.uid).to be_a(String)
     expect(student.email).to be_a(String)
