@@ -9,14 +9,11 @@ Rails.application.routes.draw do
 
   namespace :teachers do
     get '/registration', to: 'teachers#new'
-    # resources :courses, only: [:show]
-    # get '/courses/find', to: 'search#show'
+    post '/courses/:id/wars', to: 'courses#create_war'
+    delete '/courses/wars/:id', to: 'courses#destroy_war'
     resources :courses do
       resources :students, only: [:show, :index]
     end
-    # get '/courses/:course_id', to: 'courses#show'
-    # get '/courses/:course_id/edit', to: 'courses#edit'
-    # patch '/courses/:course_id', to: 'courses#update'
   end
 
   namespace :students do
