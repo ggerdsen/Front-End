@@ -23,7 +23,6 @@ RSpec.describe 'Students course CRUD' do
     end
     not_my_courses = JSON.parse(response.body, symbolize_names: true)
     course2_name = not_my_courses[:data][0][:attributes][:name]
-
     within '#my-courses' do
       expect(page).to have_button(course1_name)
       expect(page).to_not have_button(course2_name)
