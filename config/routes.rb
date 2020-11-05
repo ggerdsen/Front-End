@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   get '/auth/google_oauth2/callback', to: 'sessions#create'
 
+  get '/logout', to: 'sessions#destroy'
+
+  post '/registration', to: 'welcome#create_user'
+
   namespace :teachers do
     # resources :courses, only: [:show]
     # get '/courses/find', to: 'search#show'

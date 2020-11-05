@@ -1,3 +1,7 @@
+<!% Lines 2 + 3 pass oauth tests but is not a replacement for navbar %>
+<%= current_user.first_name %>
+<%= button_to "Log Out", logout_path, method: :get %>
+
 <section id='my-classes'>
   <% @courses.each do |course| %>
     <%= course.name %>
