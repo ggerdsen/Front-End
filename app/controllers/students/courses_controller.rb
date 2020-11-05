@@ -20,14 +20,13 @@ class Students::CoursesController < ApplicationController
     student_course_params = ({
       student_id: @student.id
     })
-    response = conn("/api/v1/students/courses/points").get do |request|
+    response = conn("/api/v1/students/courses/all-points").get do |request|
       request.body = student_course_params
     end
     point_data = JSON.parse(response.body, symbolize_names: true)[:data]
     @points = point_data.reduce(0) do |total, course|
       total += course[:attributes][:student_points]
     end
-    
     @poms = []
   end
 
@@ -77,7 +76,7 @@ class Students::CoursesController < ApplicationController
       request.body = student_course_params
     end
     point_data = JSON.parse(response.body, symbolize_names: true)[:data][0]
-    @points = point_data[:attributes][:student_points]  
+    @points = point_data[:attributes][:student_points]
     ### Still need to add Prizes, Poms, and Class Wars
   end
 
