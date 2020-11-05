@@ -17,6 +17,17 @@ class Students::CoursesController < ApplicationController
       Course.new(course_data)
     end
 
+    student_course_params = ({
+      student_id: @student.id
+    })
+    response = conn("/api/v1/students/courses/points").get do |request|
+      request.body = student_course_params
+    end
+    point_data = JSON.parse(response.body, symbolize_names: true)[:data]
+    @points = point_data.reduce(0) do |total, course|
+      total += course[:attributes][:student_points]
+    end
+    
     @poms = []
   end
 
