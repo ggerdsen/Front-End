@@ -1,53 +1,76 @@
-<section id='my-courses'>
-  <% @courses.each do |course| %>
-    <section id='course-<%=course.id%>'>
-      <ul>
-        <%= course.name %>
-        <%= link_to 'Course Show Page', "/teachers/courses/#{course.id}" %>
-      </ul>
-      <ul>
-        <%= course.school_name %>
-      </ul>
-      <ul>
-        <%= link_to 'Remove this Course', "/teachers/courses/#{course.id}", method: :delete, data: { confirm: "Are you sure?" } %>
-      </ul>
-      <ul>
-        <%= link_to 'Update this Course', "/teachers/courses/#{course.id}/edit" %>
-      </ul>
-      <ul>
-        <h3>Create a War for this Course</h3>
-        <%= form_with url: "/teachers/courses/#{course.id}/wars", method: :post do |f| %>
-        <%= f.text_field :opponent_course_code, :placeholder => "Your Opponents Course Code" %>
-        <%= f.submit 'Create War' %>
-        <% end %>
-      </ul>
-    </section>
-  <% end %>
-</section>
+<div class="jumbotron">
+      <div class="container">
+        <h1>Welcome <%= @teacher.first_name %></h1>
+      </div>
+    </div>
+<div class="container">
+      <div class="row">
+        <div class="col-md-4" id="my-courses">
+          <h2 >My Courses</h2>
+          <% @courses.each do |course| %>
+            <section id='course-<%=course.id%>'>
+              <ul>
+                <p>Course Name: <%= link_to "#{course.name}", "/teachers/courses/#{course.id}" %></p>
+              </ul>
+              <ul>
+                <p>School Name: <%= course.school_name %></p>
+              </ul>
+              <ul>
+                <%= link_to 'Remove this Course', "/teachers/courses/#{course.id}", method: :delete, data: { confirm: "Are you sure?" } %>
+              </ul>
+              <ul>
+                <%= link_to 'Update this Course', "/teachers/courses/#{course.id}/edit" %>
+              </ul>
+              <ul>
+                <h5>Create a War for this Course</h5>
+                <%= form_with url: "/teachers/courses/#{course.id}/wars", method: :post do |f| %>
+                <ul>
+                  <p>Opponents Course Code: <%= f.text_field :opponent_course_code, :placeholder => "Your Opponents Course Code" %></p>
+                </ul>
+                <ul>
+                  <%= f.submit 'Create War' %>
+                </ul>
+                <% end %>
+              </ul>
+            </section>
+          <% end %>
+          <h4>Add a New Course</h4>
+          <section id='add-courses'>
+            <%= form_with url: '/teachers/courses', method: :post do |f| %>
+            <ul>
+              <p>Course Name: </p><%= f.text_field :name %>
+            </ul>
+            <ul>
+              <p>School Name: </p><%= f.text_field :school_name %>
+            </ul>
+            <ul>
+              <%= f.submit 'Add Course' %>
+            </ul>
+            <% end %>
+          </section>
+        </div>
 
-<section id='my-wars'>
-  <h2>My Wars</h2>
-  <ol>
-  <% @wars.each do |war| %>
-    <section id='war-<%= war.id %>'>
-      <ul>
-        <%= link_to  "War against course: #{war.opponent_course_id}", "/teachers/courses/wars/#{war.id}" %>
-      </ul>
-      <ul>
-        <p>My Class Points: <%= war.challenger_course_points %> || VS || Opponent Class Points:  <%= war.opponent_course_points %></p>
-      </ul>
-      <ul>
-        <%= link_to 'Delete this War', "/teachers/courses/wars/#{war.id}", method: :delete, data: { confirm: "Are you sure?" } %>
-      </ul>
-    </section>
-  <%end%>
-  </ol>
-</section>
-
-<section id='add-courses'>
-  <%= form_with url: '/teachers/courses', method: :post do |f| %>
-    <%= f.text_field :name %>
-    <%= f.text_field :school_name %>
-    <%= f.submit 'Add Course' %>
-  <% end %>
-</section>
+        <div class="col-md-4" id='my-wars'>
+          <h2>My Wars</h2>
+          <ol>
+            <% @wars.each do |war| %>
+            <section id='war-<%= war.id %>'>
+              <ul>
+                <%= link_to  "War against course: #{war.opponent_course_id}", "/teachers/courses/wars/#{war.id}" %>
+              </ul>
+              <ul>
+                <p>My Class Points: <%= war.challenger_course_points %> || VS || Opponent Class Points:  <%= war.opponent_course_points %></p>
+              </ul>
+              <ul>
+                <%= link_to 'Delete this War', "/teachers/courses/wars/#{war.id}", method: :delete, data: { confirm: "Are you sure?" } %>
+              </ul>
+            </section>
+            <%end%>
+          </ol>
+       </div>
+        <div class="col-md-4">
+          <h2>My Poms</h2>
+       </div>
+      </div>
+  <hr>
+</div>

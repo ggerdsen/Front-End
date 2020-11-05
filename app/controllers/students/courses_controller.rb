@@ -49,12 +49,11 @@ class Students::CoursesController < ApplicationController
         request.body = student_course_creation_params
       end
       JSON.parse(response.body, symbolize_names: true)
-      redirect_to students_courses_path
+      redirect_to '/students/courses'
     else
-      redirect_to students_courses_path
+      redirect_to '/students/courses'
     end
   end
-
 
   def show
     @student = current_user
@@ -90,7 +89,7 @@ class Students::CoursesController < ApplicationController
     conn("/api/v1/students/courses/#{course_id}").delete do |request|
       request.body = student_course_deletion_params
     end
-    redirect_to students_courses_path
+    redirect_to '/students/courses'
   end
 
   private
