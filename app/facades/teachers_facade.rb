@@ -22,10 +22,11 @@ class TeachersFacade
     challenger_course = get_course(challenger_course_id)
     opponent_course = find_course_by_code(data[:opponent_course_code])
     war_params = {
-      challenger_course_id: challenger_course_id.to_i,
+      challenger_course_id: challenger_course.id.to_i,
       opponent_course_id: opponent_course.id.to_i,
       challenger_course_points: challenger_course.course_points,
-      opponent_course_points: opponent_course.course_points
+      opponent_course_points: opponent_course.course_points,
+      opponent_course_name: opponent_course.name
     }
     war_data = TeachersService.create_war(war_params, teacher[:data][:id])
     War.new(war_data)
