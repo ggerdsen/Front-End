@@ -20,21 +20,19 @@ class Students::CoursesController < ApplicationController
     student_course_params = ({
       student_id: @student.id
     })
-    response = conn("/api/v1/students/courses/points").get do |request|
+    response = conn("/api/v1/students/courses/all-points").get do |request|
       request.body = student_course_params
     end
     point_data = JSON.parse(response.body, symbolize_names: true)[:data]
     @points = point_data.reduce(0) do |total, course|
       total += course[:attributes][:student_points]
     end
-    
     @poms = []
   end
 
   def create
-    response = conn("/api/v1/teachers/courses/find?courseCode=#{student_course_params[:enrollment]}").get
+    response = conn("/api/v1/teachers/courses/find?coursecode=#{student_course_params[:enrollment]}").get
     exists = JSON.parse(response.body, symbolize_names: true)
-
     if !exists[:data].nil?
       course = JSON.parse(response.body, symbolize_names: true)
       @student = current_user
@@ -51,12 +49,11 @@ class Students::CoursesController < ApplicationController
         request.body = student_course_creation_params
       end
       JSON.parse(response.body, symbolize_names: true)
-      redirect_to students_courses_path
+      redirect_to '/students/courses'
     else
-      # Sad Path
+      redirect_to '/students/courses'
     end
   end
-
 
   def show
     @student = current_user
@@ -77,7 +74,7 @@ class Students::CoursesController < ApplicationController
       request.body = student_course_params
     end
     point_data = JSON.parse(response.body, symbolize_names: true)[:data][0]
-    @points = point_data[:attributes][:student_points]  
+    @points = point_data[:attributes][:student_points]
     ### Still need to add Prizes, Poms, and Class Wars
   end
 
@@ -92,7 +89,7 @@ class Students::CoursesController < ApplicationController
     conn("/api/v1/students/courses/#{course_id}").delete do |request|
       request.body = student_course_deletion_params
     end
-    redirect_to students_courses_path
+    redirect_to '/students/courses'
   end
 
   private

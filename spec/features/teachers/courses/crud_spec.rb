@@ -6,11 +6,10 @@ RSpec.describe 'Teachers course CRUD' do
     visit root_path
     choose(option: 'teachers')
     click_on "Sign in with Google"
+    expect(current_path).to eq(teachers_courses_path)
 
-    visit teachers_courses_path
-
-    # teacher_params = ({teacher_id: current_user[:uid]})
-    teacher_params = ({teacher_id: 1})
+    teacher = TeacherFacade.find(stub_teacher_omniauth[:uid])
+    teacher_params = ({teacher_id: teacher.id})
     response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
       request.body = teacher_params
     end
@@ -37,8 +36,10 @@ RSpec.describe 'Teachers course CRUD' do
     visit root_path
     choose(option: 'teachers')
     click_on "Sign in with Google"
+    expect(current_path).to eq(teachers_courses_path)
 
-    visit teachers_courses_path
+    teacher = TeacherFacade.find(stub_teacher_omniauth[:uid])
+    teacher_params = ({teacher_id: teacher.id})
 
     teacher_course_params = {
       name: "Band 101",
@@ -62,7 +63,7 @@ RSpec.describe 'Teachers course CRUD' do
       expect(page).to have_content(teacher_course_params[:name])
     end
 
-    teacher_params = ({teacher_id: 1}) # teacher_params = ({teacher_id: current_user[:uid]})
+    teacher_params = ({teacher_id: 1})
     response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
       request.body = teacher_params
     end
@@ -87,11 +88,10 @@ RSpec.describe 'Teachers course CRUD' do
     visit root_path
     choose(option: 'teachers')
     click_on "Sign in with Google"
+    expect(current_path).to eq(teachers_courses_path)
 
-    visit teachers_courses_path
-
-    # GET COURSE INFORMATION
-    teacher_params = ({teacher_id: 1}) # teacher_params = ({teacher_id: current_user[:uid]})
+    teacher = TeacherFacade.find(stub_teacher_omniauth[:uid])
+    teacher_params = ({teacher_id: teacher.id})
     response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
       request.body = teacher_params
     end
@@ -155,11 +155,10 @@ RSpec.describe 'Teachers course CRUD' do
     visit root_path
     choose(option: 'teachers')
     click_on "Sign in with Google"
+    expect(current_path).to eq(teachers_courses_path)
 
-    visit teachers_courses_path
-
-    # teacher_params = ({teacher_id: current_user[:uid]})
-    teacher_params = ({teacher_id: 1})
+    teacher = TeacherFacade.find(stub_teacher_omniauth[:uid])
+    teacher_params = ({teacher_id: teacher.id})
     response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
       request.body = teacher_params
     end
@@ -171,7 +170,7 @@ RSpec.describe 'Teachers course CRUD' do
 
     within '#my-courses' do
       within "#course-#{course_id}" do
-        click_on 'Course Show Page'
+        click_on "#{course_name}"
       end
     end
     expect(current_path).to eq("/teachers/courses/#{course_id}")
