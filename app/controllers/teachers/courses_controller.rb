@@ -56,6 +56,6 @@ class Teachers::CoursesController < ApplicationController
   end
 
   def war_params
-    params.permit(:opponent_course_code)
+    params.permit(:opponent_course_code, :opponent_course_name)
   end
 end
