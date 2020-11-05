@@ -30,23 +30,23 @@ class Teachers::CoursesController < ApplicationController
       update_params[:school_name] = course_params[:school_name]
     end
     @course = TeachersFacade.update_course(params[:id], update_params)
-    redirect_to teachers_courses_path
+    redirect_to '/teachers/courses'
   end
 
   def destroy
     TeachersFacade.destroy_course(params[:id])
-    redirect_to teachers_courses_path
+    redirect_to '/teachers/courses'
   end
 
   def create_war
     @teacher = current_user
     TeachersFacade.post_new_war(war_params, params[:id], @teacher.id)
-    redirect_to teachers_courses_path
+    redirect_to '/teachers/courses'
   end
 
   def destroy_war
     TeachersFacade.destroy_war(params[:id])
-    redirect_to teachers_courses_path
+    redirect_to '/teachers/courses'
   end
 
   private
