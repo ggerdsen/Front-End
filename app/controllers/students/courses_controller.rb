@@ -31,9 +31,8 @@ class Students::CoursesController < ApplicationController
   end
 
   def create
-    response = conn("/api/v1/teachers/courses/find?courseCode=#{student_course_params[:enrollment]}").get
+    response = conn("/api/v1/teachers/courses/find?coursecode=#{student_course_params[:enrollment]}").get
     exists = JSON.parse(response.body, symbolize_names: true)
-
     if !exists[:data].nil?
       course = JSON.parse(response.body, symbolize_names: true)
       @student = current_user
@@ -52,7 +51,7 @@ class Students::CoursesController < ApplicationController
       JSON.parse(response.body, symbolize_names: true)
       redirect_to students_courses_path
     else
-      # Sad Path
+      redirect_to students_courses_path
     end
   end
 
