@@ -23,7 +23,6 @@ RSpec.describe 'Students course CRUD' do
     end
     not_my_courses = JSON.parse(response.body, symbolize_names: true)
     course2_name = not_my_courses[:data][0][:attributes][:name]
-
     within '#my-courses' do
       expect(page).to have_button(course1_name)
       expect(page).to_not have_button(course2_name)
@@ -98,15 +97,29 @@ RSpec.describe 'Students course CRUD' do
     course = JSON.parse(response.body, symbolize_names: true)
     course_name = course[:data][0][:attributes][:name]
     course_id = course[:data][0][:id]
+    course_points = course[:data][0][:attributes][:course_points]
     within '#my-courses' do
       within "#course-#{course_id}" do
         click_on "#{course_name}"
       end
     end
     course2_name = course[:data][1][:attributes][:name]
+    expect(page).to have_content(student.first_name)
     expect(current_path).to eq("/students/courses/#{course_id}")
     expect(page).to have_content(course_name)
+    expect(page).to have_content(course_points)
     expect(page).to_not have_content(course2_name)
+
+    student_course_params = ({
+      course_id: course_id,
+      student_id: student.id
+    })
+    response = Faraday.get("http://localhost:3000/api/v1/students/courses/points") do |request|
+      request.body = student_course_params
+    end
+    point_data = JSON.parse(response.body, symbolize_names: true)[:data][0]
+    points = point_data[:attributes][:student_points]
+    expect(page).to have_content(points)
   end
 
   scenario "as a not registered in student user" do
