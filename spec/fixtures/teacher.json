@@ -1,0 +1,35 @@
+{
+    "data": {
+        "id": "2",
+        "type": "teacher",
+        "attributes": {
+            "first_name": "Tamica",
+            "last_name": "Mann",
+            "provider": "Google",
+            "uid": "101",
+            "email": "porter_adams@kerluke.net",
+            "token": "0jr2991ytluk",
+            "refresh_token": "tl5wjl0m52ln",
+            "school_name": "Lakeacre TAFE",
+            "school_district": "Rodgerland"
+        },
+        "relationships": {
+            "courses": {
+                "data": [
+                    {
+                        "id": "4",
+                        "type": "course"
+                    },
+                    {
+                        "id": "5",
+                        "type": "course"
+                    },
+                    {
+                        "id": "6",
+                        "type": "course"
+                    }
+                ]
+            }
+        }
+    }
+}

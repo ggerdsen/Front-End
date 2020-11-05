@@ -1,0 +1,31 @@
+{
+    "data": {
+        "id": "1",
+        "type": "teacher",
+        "attributes": {
+            "provider": "Google",
+            "uid": "23276",
+            "email": "petrina@ryan.org",
+            "token": "1cd3hxsx2il3",
+            "first_name": "Sammie",
+            "last_name": "MacGyver",
+            "school_name": "Marblewald Technical College",
+            "school_district": "Kassulkestad",
+            "role": "teacher"
+        },
+        "relationships": {
+            "courses": {
+                "data": [
+                    {
+                        "id": "2",
+                        "type": "course"
+                    },
+                    {
+                        "id": "1",
+                        "type": "course"
+                    }
+                ]
+            }
+        }
+    }
+}

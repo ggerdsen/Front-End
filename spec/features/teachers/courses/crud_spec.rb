@@ -2,13 +2,34 @@ require 'rails_helper'
 
 RSpec.describe 'Teachers course CRUD' do
   scenario "a teacher can see their dashboard (index action)" do
-    # stub_omniauth_teacher
-    stub_omniauth
+    stub_teacher_omniauth
+    json1 = File.read('spec/fixtures/teacher_index.json')
+    stub_request(:post, "https://git.heroku.com/polar-anchorage-12813.git/api/v1/teachers").to_return(status: 200, body: json1)
+    json2 = File.read('spec/fixtures/find_teacher.json')
+    stub_request(:get, "https://git.heroku.com/polar-anchorage-12813.git/api/v1/teachers/find/23276").to_return(status: 200, body: json2)
+    json3 = File.read('spec/fixtures/teacher1.json')
+    stub_request(:get, "https://git.heroku.com/polar-anchorage-12813.git/api/v1/teachers/1").to_return(status: 200, body: json3)
+    json4 = File.read('spec/fixtures/teacher_courses.json')
+    stub_request(:get, "https://git.heroku.com/polar-anchorage-12813.git/api/v1/teachers/courses").
+  with(
+    body: {"teacher_id"=>"1"},
+    headers: {
+   'Accept'=>'*/*',
+   'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+   'Content-Type'=>'application/x-www-form-urlencoded',
+   'User-Agent'=>'Faraday v1.1.0'
+    }).
+  to_return(status: 200, body: json4, headers: {})
+    visit root_path
+    choose(option: 'teachers')
+    click_on "Sign in with Google"
+    require "pry"; binding.pry
+
     visit teachers_courses_path
 
     # teacher_params = ({teacher_id: current_user[:uid]})
     teacher_params = ({teacher_id: 1})
-    response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
+    response = Faraday.get('/api/v1/teachers/courses') do |request|
       request.body = teacher_params
     end
     my_courses = JSON.parse(response.body, symbolize_names: true)
@@ -16,7 +37,7 @@ RSpec.describe 'Teachers course CRUD' do
     course2_name = my_courses[:data][0][:attributes][:name]
 
     teacher_params = ({teacher_id: 2})
-    response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
+    response = Faraday.get('/api/v1/teachers/courses') do |request|
       request.body = teacher_params
     end
     not_my_courses = JSON.parse(response.body, symbolize_names: true)
@@ -30,8 +51,11 @@ RSpec.describe 'Teachers course CRUD' do
   end
 
   scenario "a teacher can create and destroy courses on their dashboard " do
-    # stub_omniauth_teacher
-    stub_omniauth
+    stub_teacher_omniauth
+    visit root_path
+    choose(option: 'teachers')
+    click_on "Sign in with Google"
+
     visit teachers_courses_path
 
     teacher_course_params = {
@@ -57,7 +81,7 @@ RSpec.describe 'Teachers course CRUD' do
     end
 
     teacher_params = ({teacher_id: 1}) # teacher_params = ({teacher_id: current_user[:uid]})
-    response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
+    response = Faraday.get('/api/v1/teachers/courses') do |request|
       request.body = teacher_params
     end
     courses = JSON.parse(response.body, symbolize_names: true)
@@ -77,13 +101,16 @@ RSpec.describe 'Teachers course CRUD' do
   end
 
   scenario 'a teacher can update names on courses' do
-    # stub_omniauth_teacher
-    stub_omniauth
+    stub_teacher_omniauth
+    visit root_path
+    choose(option: 'teachers')
+    click_on "Sign in with Google"
+
     visit teachers_courses_path
 
     # GET COURSE INFORMATION
     teacher_params = ({teacher_id: 1}) # teacher_params = ({teacher_id: current_user[:uid]})
-    response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
+    response = Faraday.get('/api/v1/teachers/courses') do |request|
       request.body = teacher_params
     end
     courses = JSON.parse(response.body, symbolize_names: true)
@@ -142,31 +169,31 @@ RSpec.describe 'Teachers course CRUD' do
   end
 
   scenario 'a teacher can view a single courses show page' do
-    stub_omniauth
+    stub_teacher_omniauth
+    visit root_path
+    choose(option: 'teachers')
+    click_on "Sign in with Google"
+
     visit teachers_courses_path
 
     # teacher_params = ({teacher_id: current_user[:uid]})
-    teacher_params = ({teacher_id: 14})
-    response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
+    teacher_params = ({teacher_id: 1})
+    response = Faraday.get('/api/v1/teachers/courses') do |request|
       request.body = teacher_params
     end
-    course = JSON.parse(response.body, symbolize_names: true)
 
-    course_name = course[:data][0][:attributes][:name]
+    course = JSON.parse(response.body, symbolize_names: true)
     course_id = course[:data][0][:id]
+    course_name = course[:data][0][:attributes][:name]
+    course2_name = course[:data][1][:attributes][:name]
+
     within '#my-courses' do
       within "#course-#{course_id}" do
         click_on 'Course Show Page'
       end
     end
-
     expect(current_path).to eq("/teachers/courses/#{course_id}")
     expect(page).to have_content(course_name)
-
-    # within '#my-courses' do
-    #   expect(page).to have_content(course1_name)
-    #   expect(page).to have_content(course2_name)
-    #   expect(page).to_not have_content(course3_name)
-    # end
+    expect(page).to_not have_content(course2_name)
   end
 end

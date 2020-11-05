@@ -1,54 +1,23 @@
 class Teachers::CoursesController < ApplicationController
-  def conn(uri)
-    url = ENV['CLASS_WARS_DOMAIN'] + uri
-    Faraday.new(url)
-  end
-
   def index
-    teacher_id = 1
-    response = conn("/api/v1/teachers/#{teacher_id}").get
-    teacher = JSON.parse(response.body, symbolize_names: true)
-
-    teacher_course_params = {teacher_id: teacher[:data][:id].to_i}
-    response = conn("/api/v1/teachers/courses").get do |request|
-      request.body = teacher_course_params
-    end
-    json = JSON.parse(response.body, symbolize_names: true)
-    @courses = json[:data].map do |course_data|
-      Course.new(course_data)
-    end
+    @teacher = current_user
+    @courses = TeachersFacade.get_all_courses(@teacher.id)
   end
 
   def create
-    teacher_id = 1
-    response = conn("/api/v1/teachers/#{teacher_id}").get
-    teacher = JSON.parse(response.body, symbolize_names: true)
-
-    teacher_course_creation_params = {
-      name: course_params[:name],
-      teacher_id: teacher[:data][:id].to_i,
-      school_name: course_params[:school_name]
-    }
-
-    response = conn("/api/v1/teachers/courses/#{params[:id]}").post do |request|
-      request.body = teacher_course_creation_params
-    end
-
-    JSON.parse(response.body, symbolize_names: true)
+    @teacher = current_user
+    TeachersFacade.post_new_course(course_params, params[:id], @teacher.id)
     redirect_to teachers_courses_path
   end
 
   def show
-    teacher_id = 1
-    response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:id]}")
+    response = Faraday.get("https://git.heroku.com/polar-anchorage-12813.git/api/v1/teachers/courses/#{params[:id]}")
     course_data = JSON.parse(response.body, symbolize_names: true)[:data]
     @course = Course.new(course_data)
   end
 
   def edit
-    response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:id]}")
-    course_data = JSON.parse(response.body, symbolize_names: true)[:data]
-    @course = Course.new(course_data)
+    @course = TeachersFacade.edit_course(params[:id])
   end
 
   def update
@@ -59,17 +28,12 @@ class Teachers::CoursesController < ApplicationController
     if !course_params[:school_name].nil?
       update_params[:school_name] = course_params[:school_name]
     end
-    response = conn("/api/v1/teachers/courses/#{params[:id]}").patch do |request|
-      request.body = update_params
-    end
-    course_data = JSON.parse(response.body, symbolize_names: true)[:data]
-    @course = Course.new(course_data)
+    @course = TeachersFacade.update_course(params[:id], update_params)
     redirect_to teachers_courses_path
   end
 
   def destroy
-    course_id = params[:id]
-    conn("/api/v1/teachers/courses/#{course_id}").delete
+    TeachersFacade.destroy_course(params[:id])
     redirect_to teachers_courses_path
   end
 
