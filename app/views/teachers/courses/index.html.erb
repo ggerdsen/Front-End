@@ -35,24 +35,25 @@
 
         <div class="col-md-4" id='my-wars'>
           <h2><u>My Wars</u></h2>
-          <ol>
-            <% @wars.each do |war| %>
-            <section id='war-<%= war.id %>'>
-              <ul>
-                <%= link_to  "War against course: #{war.opponent_course_id}", "/teachers/courses/wars/#{war.id}" %>
-              </ul>
-              <ul>
-                <p>My Class Points: <%= war.challenger_course_points %> || VS || Opponent Class Points:  <%= war.opponent_course_points %></p>
-              </ul>
-              <ul>
-                <%= link_to 'Delete this War', "/teachers/courses/wars/#{war.id}", method: :delete, data: { confirm: "Are you sure?" } %>
-              </ul>
-            </section>
-            <%end%>
-          </ol>
+          <% @wars.each do |war| %>
+          <section id='war-<%= war.id %>'>
+            <h5>War vs. <%= war.opponent_course_name %>
+              <%= link_to  "War against course: #{war.opponent_course_id}", "/teachers/courses/wars/#{war.id}" %>
+              <p>My Class Points: <%= war.challenger_course_points %> || VS || Opponent Class Points:  <%= war.opponent_course_points %></p>
+              <%= link_to 'Delete this War', "/teachers/courses/wars/#{war.id}", method: :delete, data: { confirm: "Are you sure?" } %>
+          </section>
+          <br>
+          <%end%>
        </div>
         <div class="col-md-4">
-          <h2><u>My Poms</u></h2>
+          <section class="poms">
+            <h2>My Poms</h2>
+              <%= button_to 'Generate POM', '/pom/single_trivia_question', method: :get %>
+              <% if session[:pom] %>
+                <h3>Question: <%= @pom.html_safe %></h3>
+                <h4>Answer: <%= @answer.html_safe %></h4>
+              <% end %>
+          </section>
        </div>
       </div>
         <div class="col-md-4" id='my-prizes'>
