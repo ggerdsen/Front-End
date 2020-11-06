@@ -3,6 +3,8 @@ class Teachers::CoursesController < ApplicationController
     @teacher = current_user
     @courses = TeachersFacade.get_all_courses(@teacher.id)
     @wars = TeachersFacade.get_all_wars(@teacher.id)
+    @pom = session[:pom]
+    @answer = session[:answer]
   end
 
   def create

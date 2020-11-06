@@ -46,7 +46,14 @@
           <%end%>
        </div>
         <div class="col-md-4">
-          <h2><u>My Poms</u></h2>
+          <section class="poms">
+            <h2>My Poms</h2>
+              <%= button_to 'Generate POM', '/pom/single_trivia_question', method: :get %>
+              <% if session[:pom] %>
+                <h3>Question: <%= @pom.html_safe %></h3>
+                <h4>Answer: <%= @answer.html_safe %></h4>
+              <% end %>
+          </section>
        </div>
       </div>
   <hr>
