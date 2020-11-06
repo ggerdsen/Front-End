@@ -35,8 +35,8 @@ class TeachersFacade
   def self.get_all_wars(id)
     teacher = TeachersService.get_teacher(id)
     json = TeachersService.get_all_wars(teacher)
-    @wars = json.map do |course_data|
-      War.new(course_data)
+    @wars = json.map do |war_data|
+      War.new(war_data)
     end
   end
 
@@ -70,5 +70,13 @@ class TeachersFacade
   def self.find_course_by_code(code)
     course_data = TeachersService.course_by_code(code)
     Course.new(course_data)
+  end
+
+  def self.get_all_prizes(id)
+    teacher = TeachersService.get_teacher(id)
+    json = TeachersService.get_all_prizes(teacher)
+    @prizes = json.map do |prize_data|
+      Prize.new(prize_data)
+    end
   end
 end
