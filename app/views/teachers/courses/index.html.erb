@@ -55,5 +55,15 @@
           <h2><u>My Poms</u></h2>
        </div>
       </div>
+        <div class="col-md-4" id='my-prizes'>
+          <h2><u>My Prizes</u></h2>
+          <% @prizes.each do |prize| %>
+            <section id='prize-<%=prize.id%>'>
+                <h5>Prize: <%= link_to "#{prize.name}", "/teachers/courses/prizes/#{prize.id}" %></h5><br>
+                <h7>Points needed to Redeem: <%= prize.prize_points %></h7><br>
+            </section>
+          <% end %>
+       </div>
+      </div>
   <hr>
 </div>
