@@ -69,4 +69,12 @@ class TeachersService
   def self.destroy_war(id)
     conn("/api/v1/teachers/courses/wars/#{id}").delete
   end
+
+  def self.get_all_prizes(teacher)
+    teacher_course_params = {teacher_id: teacher[:data][:id].to_i}
+    response = conn("/api/v1/teachers/courses/all-prizes").get do |request|
+      request.body = teacher_course_params
+    end
+    JSON.parse(response.body, symbolize_names: true)[:data]
+  end
 end
