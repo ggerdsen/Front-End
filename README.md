@@ -45,7 +45,7 @@ CLASS_WARS_DOMAIN: <add your backend server>
 1. From Front End, run: ```rails s -p 3001```
 1. From your browser, go to: ```http://localhost:3001```
 
-[Heroku App Found Here](sleepy-forest-61862.herokuapp.com)
+[Heroku App Found Here](http://sleepy-forest-61862.herokuapp.com)
 
 ## Contributors
 <br>
