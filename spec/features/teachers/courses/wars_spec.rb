@@ -23,8 +23,9 @@ RSpec.describe 'Teacher Wars' do
 
     war_params = ({
       teacher_id: challenger.id,
-      challenger_course_id: challenger_courses[0][:attributes][:course_id],
-      opponent_course_id: opponent_courses[0][:attributes][:course_id],
+      challenger_course_id: challenger_courses[0][:id],
+      opponent_course_id: opponent_courses[0][:id],
+      opponent_course_name: opponent_courses[0][:attributes][:name],
       challenger_course_points: challenger_courses[0][:attributes][:course_points],
       opponent_course_points: opponent_courses[0][:attributes][:course_points]
     })
