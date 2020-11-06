@@ -19,4 +19,6 @@ Rails.application.routes.draw do
   namespace :students do
     resources :courses, only: [:show, :index, :create, :destroy]
   end
+
+  get '/pom/single_trivia_question', to: 'poms#single_trivia_question'
 end
