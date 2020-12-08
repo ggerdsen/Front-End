@@ -151,5 +151,3 @@ Travis McKinstry
 
 [git-travis]: https://github.com/TravisGM92
 [linkedin-travis]: https://www.linkedin.com/in/travis-mckinstry/
-
-
